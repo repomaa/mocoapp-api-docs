@@ -54,6 +54,10 @@ curl -X GET \
   -H 'Authorization: Token token={api-key}'
 ```
 
+Additionally, these parameters can be supplied:
+
+* **status** – "potential", "pending", "won", "lost" or "dropped"
+
 This returns an array with complete lead information (see attributes).
 
 ## GET /deals/{id}
