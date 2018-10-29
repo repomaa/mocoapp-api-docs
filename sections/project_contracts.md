@@ -28,7 +28,7 @@ curl -X GET \
   -H 'Authorization: Token token={api-key}'
 ```
 
-This returns an array with assignment information (see Attributes).
+This returns an array of all **active people** with assignment information (see Attributes).
 
 ## GET /projects/{id}/contracts/{id}
 
