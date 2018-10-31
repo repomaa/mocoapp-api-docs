@@ -1,4 +1,4 @@
-# Moco API Documenation
+# Moco API Documentation
 
 This is the official API documentation for mocoapp.com.
 
