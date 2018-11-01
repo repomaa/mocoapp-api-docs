@@ -41,6 +41,7 @@ All the entities exposed via the API can be found in their respective sections.
 * [Schedules](sections/schedules.md)
 * [Units / Teams](sections/units.md)
 * [Users](sections/users.md)
+* [User Presences](sections/presences.md)
 
 ## Authentication
 
