@@ -119,8 +119,8 @@ curl -X GET \
 Additionally, these parameters can be supplied:
 
 * **status** – ("created", "sent", "accepted", "billed", "archived")
-* **date_from** – "2018-01-01"
-* **date_to** – "2018-01-31"
+* **from** – "2018-01-01"
+* **to** – "2018-01-31"
 
 
 ## GET /offers/{id}
