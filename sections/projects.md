@@ -105,6 +105,46 @@ The following parameters can be supplied:
 * **updated_from** – "2018-01-01"
 * **updated_to** – "2018-12-31"
 
+## GET /projects/assigned
+
+Retrieve all projects assigned to the user:
+
+```bash
+curl -X GET \
+  'https://{domain}.mocoapp.com/api/v1/projects/assigned' \
+  -H 'Authorization: Token token={api-key}'
+```
+
+This returns an array with limited project information.
+
+```json
+[
+  {
+    "id": 1234,
+    "identifier": "P1900",
+    "name": "Application",
+    "active": false,
+    "billable": true,
+    "customer": {
+      "id":4567,
+      "name":"A Company"
+    },
+    "tasks": [
+      {
+        "id":573383,
+        "name": "Integrations",
+        "active": true,
+        "billable": true
+      }
+    ]
+  }
+]
+```
+
+The following parameters can be supplied:
+
+* **active** – true/false
+
 ## GET /projects/{id}
 
 Retrieve a single project:
