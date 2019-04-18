@@ -8,7 +8,7 @@ The lead representation contains among standard fields also:
 
 - Custom properties, if set
 - User (representative)
-- Customer – DEPRECATED
+- Customer – DEPRECATED: use Company
 - Company
 - Category
 - Status ("potential", "pending", "won", "lost", "dropped")
@@ -60,6 +60,7 @@ curl -X GET \
 Additionally, these parameters can be supplied:
 
 - **status** – "potential", "pending", "won", "lost" or "dropped"
+- **tags** "Important, Strategic" (comma separated list)
 
 This returns an array with complete lead information (see attributes).
 

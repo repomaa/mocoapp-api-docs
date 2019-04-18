@@ -27,8 +27,8 @@ The invoice representation contains among standard fields also:
   "net_total": 35612.5,
   "tax": 8,
   "gross_total": 38461.5,
-  "created_on": "2017-04-04", // 🚧 DEPRECATED
-  "updated_on": "2017-07-10", // 🚧 DEPRECATED
+  "created_on": "2017-04-04", // 🚧 DEPRECATED: use created_at
+  "updated_on": "2017-07-10", // 🚧 DEPRECATED: use updated_at
   "debit_number": null,
   "credit_number": null,
   "locked": false,
@@ -156,6 +156,7 @@ Additionally, these parameters can be supplied:
 - **status** – ("draft", "created", "sent", "partially_paid", "paid", "overdue", "ignored")
 - **date_from** – "2018-01-01"
 - **date_to** – "2018-01-31"
+- **tags** "Periodenfremd, Inkasso" (comma separated list)
 
 The response returns an array with all the invoice information (see attributes), except `salutation`, `footer`, `items`, `payments` and `reminders`.
 
