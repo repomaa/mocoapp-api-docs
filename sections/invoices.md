@@ -313,8 +313,7 @@ Mandatory fields are marked with a star (\*):
 - **discount\*** – 0.0
 - **hours\*** – 1.0
 - **currency\*** – 1.0
-- **footer\***– ""
-- **service_period\***– "Aug 18"
+- **footer\*** – ""
+- **service_period\*** – "Aug 18"
+- **status** – `created`|`draft` , default is `created`, specify `draft` in order to create a draft invoice
 - **items** – positions (see Attributes)
-
-Pass `status: "draft"` in order to create a draft invoice.
