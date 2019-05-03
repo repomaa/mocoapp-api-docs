@@ -316,3 +316,5 @@ Mandatory fields are marked with a star (\*):
 - **footer\***– ""
 - **service_period\***– "Aug 18"
 - **items** – positions (see Attributes)
+
+Pass `status: "draft"` in order to create a draft invoice.
