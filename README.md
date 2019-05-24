@@ -7,6 +7,7 @@ This is the official API documentation for mocoapp.com.
 - [General](#general)
 - [Entities](#entities)
 - [Authentication](#authentication)
+- [Impersonation](#impersonation)
 - [Rate Limiting](#rate-limiting)
 - [Pagination](#pagination)
 - [Errors and HTTP status codes](#errors-and-http-status-codes)
@@ -69,6 +70,12 @@ curl -X POST \
     "password": "secret"
   }'
 ```
+
+## Impersonation
+
+By default all requests are scoped to the authenticated user. Some resources cannot be written in behalf of other users like `Activities` and `User Presences`. This reflects the behaviour in the UI. But you can login as another user provided that the authenticated user has permission to _Staff_. To achieve the same behaviour in the API, one can set the following x-header:
+
+`X-IMPERSONATE-USER-ID=123` (user id to act in behalf of)
 
 ## Rate Limiting
 
