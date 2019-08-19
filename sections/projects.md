@@ -283,3 +283,5 @@ This returns the most important project business indicators:
   ]
 }
 ```
+
+⚠ All costs are in the account's main currency, it might differ from the budget and billable items!
