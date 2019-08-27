@@ -10,6 +10,7 @@ The company representation contains among default fields the following features:
 - Labels
 - Custom properties
 - Projects (shortened)
+- User (shortened)
 
 ```json
 {
@@ -22,6 +23,11 @@ The company representation contains among default fields the following features:
   "fax": "+49 30 123 45 66",
   "address": "Beispiel AG\nBeispielstrasse 123\n12345 Beispielstadt",
   "tags": ["Netzwerk", "Druckerei"],
+  "user": {
+    "id": 933589840,
+    "firstname": "Tobias",
+    "lastname": "Miesel"
+  },
   "labels": ["Netzwerk", "Druckerei"], // 🚧 DEPRECATED: use tags
   "info": "",
   "custom_properties": {
@@ -103,6 +109,7 @@ Fields for all types of companies. Mandatory fields are marked with a star (\*):
 - **info** – "Information for this company..."
 - **custom_properties** – {"UID": "123-UID-456"}
 - **labels** – ["Network", "Print"] 💡name mismatch, labels/tags are used interchangeably
+- **user_id** – 123456 💡(responsible person)
 
 Additional fields just for companies of type customer:
 
