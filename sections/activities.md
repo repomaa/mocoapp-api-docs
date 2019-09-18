@@ -175,7 +175,8 @@ curl -X POST \
   -H 'Content-Type: application/json' \
   -d '{
         "activity_ids": [47268, 47269],
-        "reason": "Courtesy service as agreed"
+        "reason": "Courtesy service as agreed",
+        "company_id": 123456
       }'
 ```
 
@@ -183,5 +184,5 @@ Mandatory fields are marked with a star (\*):
 
 - **reason\*** – "Courtesy service as agreed"
 - **activity_ids\*** – [123, 234, 345]
-- **customer_id\*** – 123456 (customer ID these activities belong to)
+- **company_id\*** – 123456 (customer ID these activities belong to)
 - **project_id** – 234567 (project ID these activities belong to)
