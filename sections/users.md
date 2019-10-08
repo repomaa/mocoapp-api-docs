@@ -4,7 +4,7 @@ German: "Personal"
 
 ## Attributes
 
-```json
+```json5
 {
   "id": 123,
   "firstname": "Max",

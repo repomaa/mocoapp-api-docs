@@ -8,7 +8,7 @@ Holidays contain among the standard fields also:
 
 - User (creator)
 
-```json
+```json5
 {
   "id": 12345,
   "year": 2019,

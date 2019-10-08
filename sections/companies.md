@@ -12,7 +12,7 @@ The company representation contains among default fields the following features:
 - Projects (shortened)
 - User (shortened)
 
-```json
+```json5
 {
   "id": 760253573,
   "type": "customer",

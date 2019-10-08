@@ -10,7 +10,7 @@ The representation contains, among the standard fields, also the following field
 - Company
 - Project
 
-```json
+```json5
 {
   "id": 47266,
   "date": "2017-07-07",

@@ -9,7 +9,7 @@ The offer representation contains among the standard fields:
 - positions (items)
 - position types ("title", "description", "item", "subtotal", "page-break" or "separator")
 
-```json
+```json5
 {
   "id": 273,
   "identifier": "A1704-042",

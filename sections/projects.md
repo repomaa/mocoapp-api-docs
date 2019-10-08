@@ -14,7 +14,7 @@ The project representation contains, among the standard fields, also:
 
 The attributes `hourly_rate` and `billing_variant` are linked. By choosing the billing variant "project", the hourly rate is just that. If choosing "task" (depending on the service) or "user" (depending on the staff), hourly rate becomes the mean value of hourly rates. Thus, `hourly_rate` on a `task` or `contract` only become relevant if the `billing_variant` is set accordingly.
 
-```json
+```json5
 {
   "id": 1234567,
   "identifier": "P001",
@@ -123,7 +123,7 @@ curl -X GET \
 
 This returns an array with limited project information.
 
-```json
+```json5
 [
   {
     "id": 1234,
@@ -251,7 +251,7 @@ curl -X GET \
 
 This returns the most important project business indicators:
 
-```json
+```json5
 {
   "budget_total": 50000.0,
   "budget_progress_in_percentage": 50,

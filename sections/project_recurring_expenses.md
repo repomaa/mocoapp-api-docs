@@ -8,7 +8,7 @@ The representation contains, among the standard fields, also:
 
 - Custom properties
 
-```json
+```json5
 {
   "id": 47266,
   "start_date": "2017-07-01",

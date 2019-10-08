@@ -8,7 +8,7 @@ The representation contains, among the standard fields, also:
 
 - user (creator)
 
-```json
+```json5
 {
   "id": 123,
   "commentable_id": 12345,

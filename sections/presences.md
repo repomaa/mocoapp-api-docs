@@ -8,7 +8,7 @@ Presences contain among the standard fields also:
 
 - User (creator)
 
-```json
+```json5
 {
   "id": 982237015,
   "date": "2018-07-03",

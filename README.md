@@ -117,7 +117,7 @@ Example:
 
 MOCO supports adding custom fields to many of its resources. These custom fields are readable and writable via the `custom_properties` field.
 
-```json
+```json5
 "custom_properties": {
     "UID": "123-UID-456",
     "Branche": "Automotive"

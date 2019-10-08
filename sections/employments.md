@@ -8,7 +8,7 @@ Employments contain among the standard fields also:
 
 - User
 
-```json
+```json5
 {
   "id": 982237015,
   "weekly_target_hours": 29.75,

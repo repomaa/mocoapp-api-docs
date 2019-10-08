@@ -15,7 +15,7 @@ The lead representation contains among standard fields also:
 
 The company is optional. The category is only important in status "pending".
 
-```json
+```json5
 {
   "id": 123,
   "name": "Website V2",

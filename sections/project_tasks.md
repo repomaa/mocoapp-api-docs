@@ -4,7 +4,7 @@ German: "Projekte / Leistungen"
 
 ## Attributes
 
-```json
+```json5
 {
   "id": 760253573,
   "name": "Projektleitung",

@@ -9,7 +9,7 @@ Includes among the standard fields for contacts also:
 - Tags
 - Company (if this contact belongs to a company)
 
-```json
+```json5
 {
   "id": 123,
   "gender": "M",

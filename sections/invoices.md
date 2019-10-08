@@ -11,7 +11,7 @@ The invoice representation contains among standard fields also:
 - payments
 - reminders
 
-```json
+```json5
 {
   "id": 80547,
   "customer_id": 760269602,
