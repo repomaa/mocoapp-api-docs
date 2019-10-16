@@ -34,7 +34,7 @@ Retrieve all comments
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/comments' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 This returns complete comment information (see Attributes).
@@ -53,7 +53,7 @@ Retrieve a single comment:
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/comments/{id}' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 This returns a single comment representation.
@@ -65,7 +65,7 @@ Create a comment:
 ```bash
 curl -X POST \
   'https://{domain}.mocoapp.com/api/v1/comments' \
-  -H 'Authorization: Token token={api-key}' \
+  -H 'Authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
         "commentable_id": 123,
@@ -87,7 +87,7 @@ Create multiple comments in bulk:
 ```bash
 curl -X POST \
   'https://{domain}.mocoapp.com/api/v1/comments/bulk' \
-  -H 'Authorization: Token token={api-key}' \
+  -H 'Authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
         "commentable_ids": [123, 234, 345],
@@ -109,7 +109,7 @@ Update a comment:
 ```bash
 curl -X PUT \
   'https://{domain}.mocoapp.com/api/v1/comments/{id}' \
-  -H 'Authorization: Token token={api-key}' \
+  -H 'Authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
         "text": "<div>Project is paused for now.</div>.",
@@ -125,5 +125,5 @@ Deleting manually created comments:
 ```bash
 curl -X DELETE \
   'https://{domain}.mocoapp.com/api/v1/comments/{id}' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```

@@ -59,7 +59,7 @@ Retrieve all companies:
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/companies' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 It's also possible to filter:
@@ -77,7 +77,7 @@ Retrieve a single company:
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/companies/123' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 This returns a single company's complete represenation.
@@ -89,7 +89,7 @@ Create a company:
 ```bash
 curl -X POST \
   'https://{domain}.mocoapp.com/api/v1/companies' \
-  -H 'Authorization: Token token={api-key}' \
+  -H 'Authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
         "name": "Beispiel AG",
@@ -125,7 +125,7 @@ Update a company.
 ```bash
 curl -X PUT \
   'https://{domain}.mocoapp.com/api/v1/companies/{123}' \
-  -H 'authorization: Token token={api-key}' \
+  -H 'authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
         "name": "Beispiel GmbH",

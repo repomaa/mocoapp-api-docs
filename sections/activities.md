@@ -57,7 +57,7 @@ Retrieve all activities:
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/activities?from=2018-06-01&to=2018-06-30&project_id=4242' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 This returns an array of all activities.
@@ -76,7 +76,7 @@ Retrieve a single activity:
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/activities/{id}' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 ## POST /activities
@@ -88,7 +88,7 @@ Every activity is created for the user that the API key belongs to.
 ```bash
 curl -X POST \
   'https://{domain}.mocoapp.com/api/v1/activities' \
-  -H 'Authorization: Token token={api-key}' \
+  -H 'Authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
         "date": "2017-06-11",
@@ -119,7 +119,7 @@ Update an activity.
 ```bash
 curl -X PUT \
   'https://{domain}.mocoapp.com/api/v1/activities/{id}' \
-  -H 'Authorization: Token token={api-key}' \
+  -H 'Authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
         "hours": 2.0
@@ -135,7 +135,7 @@ Start or continue a timer on an activity.
 ```bash
 curl -X PATCH \
   'https://{domain}.mocoapp.com/api/v1/activities/{id}/start_timer' \
-  -H 'Authorization: Token token={api-key}' \
+  -H 'Authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
 ```
 
@@ -148,7 +148,7 @@ Stop a timer running on an activity.
 ```bash
 curl -X PATCH \
   'https://{domain}.mocoapp.com/api/v1/activities/{id}/stop_timer' \
-  -H 'Authorization: Token token={api-key}' \
+  -H 'Authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
 ```
 
@@ -159,7 +159,7 @@ Delete an activity.
 ```bash
 curl -X DELETE \
   'https://{domain}.mocoapp.com/api/v1/activities/{id}' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 ⚠️ Deleting an activity is only possible if this activity has not yet been billed or locked.
@@ -171,7 +171,7 @@ Mark activities as "already billed".
 ```bash
 curl -X POST \
   'https://{domain}.mocoapp.com/api/v1/activities/disregard' \
-  -H 'Authorization: Token token={api-key}' \
+  -H 'Authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
         "activity_ids": [47268, 47269],

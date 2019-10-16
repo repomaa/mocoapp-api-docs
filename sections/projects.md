@@ -93,7 +93,7 @@ Retrieve all projects:
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/projects' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 This returns an array with complete project information (see Attributes).
@@ -118,7 +118,7 @@ Retrieve all projects assigned to the user:
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/projects/assigned' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 This returns an array with limited project information.
@@ -158,7 +158,7 @@ Retrieve a single project:
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/projects/{id}' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 This returns a single project representation.
@@ -170,7 +170,7 @@ Create a project:
 ```bash
 curl -X POST \
   'https://{domain}.mocoapp.com/api/v1/projects' \
-  -H 'Authorization: Token token={api-key}' \
+  -H 'Authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
         "name": "Website Relaunch",
@@ -204,7 +204,7 @@ Update a project:
 ```bash
 curl -X PUT \
   'https://{domain}.mocoapp.com/api/v1/projects/{id}' \
-  -H 'Authorization: Token token={api-key}' \
+  -H 'Authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
         "budget": 25000
@@ -224,7 +224,7 @@ Archival of a project:
 ```bash
 curl -X PUT \
   'https://{domain}.mocoapp.com/api/v1/projects/{id}/archive' \
-  -H 'Authorization: Token token={api-key}' \
+  -H 'Authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json'
 ```
 
@@ -235,7 +235,7 @@ Reactivate an archived project:
 ```bash
 curl -X PUT \
   'https://{domain}.mocoapp.com/api/v1/projects/{id}/unarchive' \
-  -H 'Authorization: Token token={api-key}' \
+  -H 'Authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json'
 ```
 
@@ -246,7 +246,7 @@ Retrieve a project report:
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/projects/{id}/report' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 This returns the most important project business indicators:

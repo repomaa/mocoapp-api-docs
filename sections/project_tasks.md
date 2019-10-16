@@ -24,7 +24,7 @@ Retrieve all tasks on a project:
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/projects/{id}/tasks' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 This returns an array with complete task information (see Attributes).
@@ -36,7 +36,7 @@ Retrieve a single task on a project:
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/projects/{id}/tasks/{id}' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 ## POST /projects/{id}/tasks
@@ -46,7 +46,7 @@ Create a task on a project:
 ```bash
 curl -X POST \
   'https://{domain}.mocoapp.com/api/v1/projects/{id}/tasks' \
-  -H 'Authorization: Token token={api-key}' \
+  -H 'Authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
         "name": "Design / UX",
@@ -70,7 +70,7 @@ Update a task on a project:
 ```bash
 curl -X PUT \
   'https://{domain}.mocoapp.com/api/v1/projects/{id}/tasks/{id}' \
-  -H 'Authorization: Token token={api-key}' \
+  -H 'Authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
         "budget": 5000,
@@ -87,5 +87,5 @@ Fields are analogous to the POST request.
 ```bash
 curl -X DELETE \
   'https://{domain}.mocoapp.com/api/v1/projects/{id}/tasks/{id}' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```

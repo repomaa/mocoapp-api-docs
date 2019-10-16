@@ -33,7 +33,7 @@ Retrieve all holidays:
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/users/holidays?year=2018' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 This returns an array of all holidays.
@@ -50,7 +50,7 @@ Retrieve a single holiday:
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/users/holidays/{id}' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 ## POST /users/holidays
@@ -60,7 +60,7 @@ Create a holiday:
 ```bash
 curl -X POST \
   'https://{domain}.mocoapp.com/api/v1/users/holidays' \
-  -H 'Authorization: Token token={api-key}' \
+  -H 'Authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
         "user_id": 933590696,
@@ -84,7 +84,7 @@ Update a holiday.
 ```bash
 curl -X PUT \
   'https://{domain}.mocoapp.com/api/v1/users/holidays/{id}' \
-  -H 'Authorization: Token token={api-key}' \
+  -H 'Authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
         "hours": 175
@@ -100,5 +100,5 @@ Delete a holiday.
 ```bash
 curl -X DELETE \
   'https://{domain}.mocoapp.com/api/v1/users/holidays/{id}' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```

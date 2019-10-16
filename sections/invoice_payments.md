@@ -30,7 +30,7 @@ Retrieve all invoice payments:
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/invoices/payments' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 ## GET /invoices/payments/{id}
@@ -40,7 +40,7 @@ Retrieve a single invoice payment:
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/invoices/payments/{id}' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 ## POST /invoices/payments
@@ -50,7 +50,7 @@ Create an invoice payment:
 ```bash
 curl -X POST \
   'https://{domain}.mocoapp.com/api/v1/invoices/payments' \
-  -H 'Authorization: Token token={api-key}' \
+  -H 'Authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
         "date": "2018-10-20",
@@ -74,7 +74,7 @@ Create multiple invoice payments in bulk:
 ```bash
 curl -X POST \
   'https://{domain}.mocoapp.com/api/v1/invoices/payments/bulk' \
-  -H 'Authorization: Token token={api-key}' \
+  -H 'Authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
         "bulk_data": [
@@ -108,7 +108,7 @@ Update an invoice payment:
 ```bash
 curl -X PUT \
   'https://{domain}.mocoapp.com/api/v1/invoices/payments/{id}' \
-  -H 'Authorization: Token token={api-key}' \
+  -H 'Authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
         "paid_total": 2000
@@ -124,5 +124,5 @@ Delete an invoice payment:
 ```bash
 curl -X DELETE \
   'https://{domain}.mocoapp.com/api/v1/invoices/payments/{id}' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```

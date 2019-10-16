@@ -30,7 +30,7 @@ Retrieve all payment schedules for the project:
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/projects/{project_id}/payment_schedules' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 ## GET /projects/{project_id}/payment_schedules/{id}
@@ -40,7 +40,7 @@ Retrieve a single payment schedule on a project:
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/projects/{project_id}/payment_schedules/{id}' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 ## POST /projects/{project_id}/payment_schedules
@@ -50,7 +50,7 @@ Create a paymennt schedule for the project:
 ```bash
 curl -X POST \
   'https://{domain}.mocoapp.com/api/v1/projects/{project_id}/payment_schedules' \
-  -H 'Authorization: Token token={api-key}' \
+  -H 'Authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
      	"net_total": 1800,
@@ -71,7 +71,7 @@ Update a payment schedule for a project:
 ```bash
 curl -X PUT \
   'https://{domain}.mocoapp.com/api/v1/projects/{project_id}/payment_schedules/{id}' \
-  -H 'Authorization: Token token={api-key}' \
+  -H 'Authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
         "checked": true
@@ -87,5 +87,5 @@ Fields are analogous to the POST request.
 ```bash
 curl -X DELETE \
   'https://{domain}.mocoapp.com/api/v1/projects/{project_id}/payment_schedules/{id}' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```

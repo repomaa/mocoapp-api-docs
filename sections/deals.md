@@ -54,7 +54,7 @@ Retrieve all leads:
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/deals' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 Additionally, these parameters can be supplied:
@@ -71,7 +71,7 @@ Retrieve a single lead:
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/deals/{id}' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 The response is a single lead representation.
@@ -83,7 +83,7 @@ Create a lead:
 ```bash
 curl -X POST \
   'https://{domain}.mocoapp.com/api/v1/deals' \
-  -H 'Authorization: Token token={api-key}' \
+  -H 'Authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
         "name": "Beispiel AG Website Relaunch",
@@ -114,7 +114,7 @@ Update a lead:
 ```bash
 curl -X PUT \
   'https://{domain}.mocoapp.com/api/v1/deals/{id}' \
-  -H 'Authorization: Token token={api-key}' \
+  -H 'Authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
         "status": "lost"

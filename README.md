@@ -57,7 +57,7 @@ You need an API key for authentication. Each user can find their user-specific k
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/projects.json' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 This key can also be requested via API:
@@ -130,7 +130,7 @@ Parameters are sent with their name as key:
 ```bash
 curl -X POST \
   https://{domain}.mocoapp.com/api/v1/customers \
-  -H 'Authorization: Token token={api-key}' \
+  -H 'Authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
     "name": "Beispiel AG",
@@ -146,7 +146,7 @@ All values are encoded as strings, expect for Multiple Choice, which is encoded 
 ```bash
 curl -X POST \
   https://{domain}.mocoapp.com/api/v1/customers \
-  -H 'Authorization: Token token={api-key}' \
+  -H 'Authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
         "custom_properties": {

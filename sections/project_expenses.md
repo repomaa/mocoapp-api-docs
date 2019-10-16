@@ -50,7 +50,7 @@ Retrieve all additional services for a project:
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/projects/{id}/expenses' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 This returns an array with all additional services (see Attributes).
@@ -62,7 +62,7 @@ Retrieve a single additional service for a project:
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/projects/{id}/expenses/{id}' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 ## POST /projects/{id}/expenses
@@ -72,7 +72,7 @@ Create an additional service entry on a project:
 ```bash
 curl -X POST \
   'https://{domain}.mocoapp.com/api/v1/projects/{id}/expenses' \
-  -H 'Authorization: Token token={api-key}' \
+  -H 'Authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
         "date": "2018-10-01",
@@ -104,7 +104,7 @@ Create multiple additional services entries:
 ```bash
 curl -X POST \
   'https://{domain}.mocoapp.com/api/v1/projects/{id}/expenses/bulk' \
-  -H 'Authorization: Token token={api-key}' \
+  -H 'Authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
         "bulk_data": [
@@ -147,7 +147,7 @@ Update an additional services entry on a project:
 ```bash
 curl -X PUT \
   'https://{domain}.mocoapp.com/api/v1/projects/{id}/expenses/{id}' \
-  -H 'Authorization: Token token={api-key}' \
+  -H 'Authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
         "unit_price": 49
@@ -165,7 +165,7 @@ Deletions are only possible if this entry is not yet billed.
 ```bash
 curl -X DELETE \
   'https://{domain}.mocoapp.com/api/v1/projects/{id}/expenses/{id}' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 ## POST /projects/{id}/expenses/disregard
@@ -175,7 +175,7 @@ Mark additional services entries as "already billed".
 ```bash
 curl -X POST \
   'https://{domain}.mocoapp.com/api/v1/projects/{id}/expenses/disregard' \
-  -H 'Authorization: Token token={api-key}' \
+  -H 'Authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
         "expense_ids": [1234, 5678],
@@ -195,7 +195,7 @@ Retrieve all additional services
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/projects/expenses' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 This returns an array with all additional services (see Attributes).

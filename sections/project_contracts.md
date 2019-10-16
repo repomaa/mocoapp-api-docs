@@ -28,7 +28,7 @@ Retrieve all staff assignments for a project:
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/projects/{id}/contracts' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 This returns an array of all **active people** with assignment information (see Attributes).
@@ -40,7 +40,7 @@ Retrieve a single staff assignment on a project:
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/projects/{id}/contracts/{id}' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 ## POST /projects/{id}/contracts
@@ -50,7 +50,7 @@ Assign a person to a project:
 ```bash
 curl -X POST \
   'https://{domain}.mocoapp.com/api/v1/projects/{id}/contracts' \
-  -H 'Authorization: Token token={api-key}' \
+  -H 'Authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
         "user_id": 123456,
@@ -73,7 +73,7 @@ Update a staff assignment to a project:
 ```bash
 curl -X PUT \
   'https://{domain}.mocoapp.com/api/v1/projects/{id}/contracts/{id}' \
-  -H 'Authorization: Token token={api-key}' \
+  -H 'Authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
         "budget": 8800
@@ -89,5 +89,5 @@ Fields are analogous to the POST request (except `user_id`).
 ```bash
 curl -X DELETE \
   'https://{domain}.mocoapp.com/api/v1/projects/{id}/contracts/{id}' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```

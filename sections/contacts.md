@@ -45,7 +45,7 @@ Retrieve all contacts:
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/contacts/people' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 It's also possible to filter:
@@ -61,7 +61,7 @@ Retrieve a single contact:
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/contacts/people/{id}' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 Returns the representation for a single contact, including tags and the company.
@@ -73,7 +73,7 @@ Create a contact:
 ```bash
 curl -X POST \
   'https://{domain}.mocoapp.com/api/v1/contacts/people' \
-  -H 'Authorization: Token token={api-key}' \
+  -H 'Authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
         "firstname": "Peter",
@@ -108,7 +108,7 @@ Update a contact:
 ```bash
 curl -X PUT \
   'https://{domain}.mocoapp.com/api/v1/contacts/people/{id}' \
-  -H 'Authorization: Token token={api-key}' \
+  -H 'Authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
         "job_position": "Head of Sales"

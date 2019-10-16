@@ -22,7 +22,7 @@ Retrieve all web hooks:
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/account/web_hooks' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 This returns an array with complete web hooks information (see Attributes).
@@ -34,7 +34,7 @@ Retrieve a single web hook:
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/account/web_hook/{id}' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 This returns a single web hook representation.
@@ -46,7 +46,7 @@ Create a new web hook:
 ```bash
 curl -X POST \
   'https://{domain}.mocoapp.com/api/v1/account/web_hooks' \
-  -H 'Authorization: Token token={api-key}' \
+  -H 'Authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
         "target": "Activity",
@@ -68,7 +68,7 @@ Update the web hook:
 ```bash
 curl -X PUT \
   'https://{domain}.mocoapp.com/api/v1/account/web_hooks/{id}' \
-  -H 'Authorization: Token token={api-key}' \
+  -H 'Authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
         "hook": "https://example.org/v2"
@@ -84,7 +84,7 @@ Disable the web hook (if already disabled, it does nothing):
 ```bash
 curl -X PUT \
   'https://{domain}.mocoapp.com/api/v1/account/web_hooks/{id}/disable' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 ## PUT /account/web_hooks/{id}/enable
@@ -94,7 +94,7 @@ Enable the web hook (if already enabled, it does nothing):
 ```bash
 curl -X PUT \
   'https://{domain}.mocoapp.com/api/v1/account/web_hooks/{id}/enable' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 ## DELETE /account/web_hooks/{id}
@@ -104,5 +104,5 @@ Removes the web hook:
 ```bash
 curl -X DELETE \
   'https://{domain}.mocoapp.com/api/v1/account/web_hooks/{id}' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```

@@ -36,7 +36,7 @@ Retrieve all teams:
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/units' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 This returns an array with complete team information (see Attributes).
@@ -48,5 +48,5 @@ Retrieve a single team:
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/units/{id}' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```

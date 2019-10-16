@@ -152,7 +152,7 @@ Retrieve all invoices:
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/invoices' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 Additionally, these parameters can be supplied:
@@ -173,7 +173,7 @@ Retrieve all locked invoices:
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/invoices/locked' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 Additionally, the following parameters can be supplied:
@@ -192,7 +192,7 @@ Retrieve a single invoice:
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/invoices/{id}' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 This returns a single invoice representation, including positions, payments and reminders.
@@ -204,7 +204,7 @@ Retrieve a single invoice document:
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/invoices/{id}.pdf' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 Additionally, the following parameters can be supplied:
@@ -220,7 +220,7 @@ Retrieve a time sheet for a particular invoice:
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/invoices/{id}/timesheet.pdf' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 Additionally, the following parameters can be supplied:
@@ -236,7 +236,7 @@ Update an invoice status:
 ```bash
 curl -X PUT \
   'https://{domain}.mocoapp.com/api/v1/invoices/{id}/update_status' \
-  -H 'authorization: Token token={api-key}' \
+  -H 'authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
         "status": "sent"
@@ -252,7 +252,7 @@ Create a neutral invoice:
 ```bash
 curl -X POST \
   'https://{domain}.mocoapp.com/api/v1/invoices' \
-  -H 'Authorization: Token token={api-key}' \
+  -H 'Authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
         "customer_id": 123456,

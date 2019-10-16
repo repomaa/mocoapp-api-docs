@@ -31,7 +31,7 @@ Retrieve all presences:
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/users/presences?from=2018-06-01&to=2018-06-30' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 This returns an array of all presences.
@@ -48,7 +48,7 @@ Retrieve a single presence:
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/users/presences/{id}' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 ## POST /users/presences
@@ -60,7 +60,7 @@ Every presence is created for the user that the API key belongs to.
 ```bash
 curl -X POST \
   'https://{domain}.mocoapp.com/api/v1/users/presences' \
-  -H 'Authorization: Token token={api-key}' \
+  -H 'Authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
         "date": "2018-06-11",
@@ -82,7 +82,7 @@ This request creates a new presence for the user with the corresponding API-Key 
 ```bash
 curl -X POST \
   'https://{domain}.mocoapp.com/api/v1/users/presences/touch' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 A first request at 9:30 AM creates a presence with `from="09:30"`, a second request at 11:30 AM sets `to="11:30"` of the previous presence.
@@ -100,7 +100,7 @@ Update a presence.
 ```bash
 curl -X PUT \
   'https://{domain}.mocoapp.com/api/v1/users/presences/{id}' \
-  -H 'Authorization: Token token={api-key}' \
+  -H 'Authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
         "to": "14:00"
@@ -116,5 +116,5 @@ Delete a presence.
 ```bash
 curl -X DELETE \
   'https://{domain}.mocoapp.com/api/v1/users/presences/{id}' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```

@@ -41,7 +41,7 @@ Retrieve all recurring additional services entries on a project:
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/projects/{id}/recurring_expenses' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 This returns an array of recurring additional services entries (see Attributes).
@@ -53,7 +53,7 @@ Retrieve a single recurring additional services entry on a project:
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/projects/{id}/recurring_expenses/{id}' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 ## POST /projects/{id}/recurring_expenses
@@ -63,7 +63,7 @@ Create a recurring additional services entry on a project:
 ```bash
 curl -X POST \
   'https://{domain}.mocoapp.com/api/v1/projects/{id}/recurring_expenses' \
-  -H 'Authorization: Token token={api-key}' \
+  -H 'Authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
         "start_date": "2018-10-01",
@@ -98,7 +98,7 @@ Update a recurring additional services entry on a project:
 ```bash
 curl -X PUT \
   'https://{domain}.mocoapp.com/api/v1/projects/{id}/recurring_expenses/{id}' \
-  -H 'Authorization: Token token={api-key}' \
+  -H 'Authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
         "unit_price": 49,
@@ -112,5 +112,5 @@ The fields are analogous to the POST request, except for `start_date` and `perio
 ```bash
 curl -X DELETE \
   'https://{domain}.mocoapp.com/api/v1/projects/{id}/recurring_expenses/{id}' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```

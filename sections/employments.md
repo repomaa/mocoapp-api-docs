@@ -35,7 +35,7 @@ Retrieve all employments:
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/users/employments' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 This returns an array of all employments.
@@ -52,5 +52,5 @@ Retrieve a single employment:
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/users/employments/{id}' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```

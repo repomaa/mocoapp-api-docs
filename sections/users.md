@@ -37,7 +37,7 @@ Retrieve all staff:
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/users' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 This returns an array with complete staff information (see Attributes).
@@ -53,7 +53,7 @@ Retrieve a single staff member:
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/users/{id}' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 This returns a single staff member representation.
@@ -65,7 +65,7 @@ Create a staff member:
 ```bash
 curl -X POST \
   'https://{domain}.mocoapp.com/api/v1/users' \
-  -H 'Authorization: Token token={api-key}' \
+  -H 'Authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
         "firstname": "Carmen",
@@ -101,7 +101,7 @@ Update a staff member:
 ```bash
 curl -X PUT \
   'https://{domain}.mocoapp.com/api/v1/users/{id}' \
-  -H 'Authorization: Token token={api-key}' \
+  -H 'Authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
         "lastname": "Casanova",
@@ -118,5 +118,5 @@ Fields are analogous to the POST request. A related [employment](employments.md)
 ```bash
 curl -X DELETE \
   'https://{domain}.mocoapp.com/api/v1/users/{id}' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```

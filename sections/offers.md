@@ -117,7 +117,7 @@ Retrieve all offers:
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/offers' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 This returns an array with complete offer information (see Attributes), except: `salutation`, `footer` and `items`.
@@ -127,7 +127,7 @@ Offers can be sorted by: `date`, `created_at` and `title`:
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/offers?sort=date' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 Additionally, these parameters can be supplied:
@@ -144,7 +144,7 @@ Retrieve a single offer:
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/offers/{id}' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 This returns a single offer representation, including positions.
@@ -156,7 +156,7 @@ Retrieve a single offer document:
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/offers/{id}.pdf' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 Additionally, the following parameters can be supplied:
@@ -172,7 +172,7 @@ Create an offer:
 ```bash
 curl -X POST \
   'https://{domain}.mocoapp.com/api/v1/offers' \
-  -H 'Authorization: Token token={api-key}' \
+  -H 'Authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
         "deal_id": 123,

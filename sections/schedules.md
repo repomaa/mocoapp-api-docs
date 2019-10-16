@@ -41,7 +41,7 @@ Retrieve all planning entries (paged):
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/schedules?from=2018-10-01&to=2018-10-31' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 This returns an array with complete schedule information (see Attributes).
@@ -60,7 +60,7 @@ Retrieve a single planning entry:
 ```bash
 curl -X GET \
   'https://{domain}.mocoapp.com/api/v1/schedules/{id}' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
 ## POST /schedules
@@ -72,7 +72,7 @@ The entry is always created with the user that's executing the request (authoriz
 ```bash
 curl -X POST \
   'https://{domain}.mocoapp.com/api/v1/schedules' \
-  -H 'Authorization: Token token={api-key}' \
+  -H 'Authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
         "date": "2018-10-01",
@@ -98,7 +98,7 @@ Update a planning entry:
 ```bash
 curl -X PUT \
   'https://{domain}.mocoapp.com/api/v1/schedules/{id}' \
-  -H 'Authorization: Token token={api-key}' \
+  -H 'Authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
         "comment": "A comment",
@@ -112,5 +112,5 @@ Fields are analogous to the POST request.
 ```bash
 curl -X DELETE \
   'https://{domain}.mocoapp.com/api/v1/schedules/{id}' \
-  -H 'Authorization: Token token={api-key}'
+  -H 'Authorization: Token token=YOUR_API_KEY'
 ```
