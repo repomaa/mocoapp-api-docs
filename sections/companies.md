@@ -102,7 +102,7 @@ Fields for all types of companies. Mandatory fields are marked with a star (\*):
 
 - **name\*** – "Beispiel AG"
 - **type\*** – ("customer", "supplier", "organization")
-- **country_code** – (ISO Alpha-2 Country Code like "DE" / "CH" / "AT" in upper case - defaults is account country)
+- **country_code** – (ISO Alpha-2 Country Code like "DE" / "CH" / "AT" in upper case - default is account country)
 - **website** – "http//www.lieferant.com"
 - **fax** – "+49 30 123 45 67"
 - **phone** – "+49 30 123 45 67"
