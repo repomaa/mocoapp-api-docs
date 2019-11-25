@@ -26,6 +26,7 @@ The attributes `hourly_rate` and `billing_variant` are linked. By choosing the b
   "billing_variant": "project",
   "billing_address": "Beispiel AG\nHerr Maier\nBeispielstrasse...",
   "budget": 18200,
+  "budget_expenses": 8200,
   "hourly_rate": 150,
   "info": "Abrechnung jährlich",
   "labels": ["Print", "Digital"],
