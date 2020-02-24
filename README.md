@@ -7,7 +7,7 @@ This is the official API documentation for mocoapp.com.
 - [General](#general)
 - [Entities](#entities)
 - [Authentication](#authentication)
-- [Client Implementations / API Wrappers](#client-implementations-api-wrapper)
+- [Client Implementations / API Wrappers](#client-implementations--api-wrappers)
 - [Impersonation](#impersonation)
 - [Rate Limiting](#rate-limiting)
 - [Pagination](#pagination)
