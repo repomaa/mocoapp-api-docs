@@ -69,6 +69,7 @@ The following parameters can be supplied:
 - **to\*** – "2018-06-30"
 - **user_id** – 123
 - **project_id** – 345
+- **task_id** – 789
 
 ## GET /activities/{id}
 
