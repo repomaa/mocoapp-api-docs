@@ -21,6 +21,7 @@ The attributes `hourly_rate` and `billing_variant` are linked. By choosing the b
   name: "Website Support",
   active: true,
   billable: true,
+  fixed_price: true,
   finish_date: "2018-12-31",
   currency: "EUR",
   billing_variant: "project",
