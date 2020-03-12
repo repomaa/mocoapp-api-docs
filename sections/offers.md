@@ -133,7 +133,7 @@ curl -X GET \
 
 Additionally, these parameters can be supplied:
 
-- **status** – ("created", "sent", "accepted", "billed", "archived")
+- **status** – ("created", "sent", "accepted", "partially_billed", "billed", "archived")
 - **from** – "2018-01-01"
 - **to** – "2018-01-31"
 - **identifier** "A1903-003"
