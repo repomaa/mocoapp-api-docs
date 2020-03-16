@@ -13,6 +13,7 @@ Holidays contain among the standard fields also:
   "id": 12345,
   "year": 2019,
   "title": "Urlaubsanspruch 80%",
+  "days": 20,
   "hours": 160,
   "user": {
     "id": 933590696,
@@ -24,7 +25,8 @@ Holidays contain among the standard fields also:
 }
 ```
 
-Holiday credits have to be set in hours. There is a setting in the holiday section in MOCO to adjust this per user per year depending on the daily hours of a regular working day. 10 days at 5h/day = 50 hours and 10 days at 8h/day = 80 hours.
+Holiday credits have to be set in days. Holiday days are also converted to hours using the _daily hours_ value that may
+be set for every user in the holiday section in MOCO: 10 days at 5h/day = 50 hours and 10 days at 8h/day = 80 hours.
 
 ## GET /users/holidays
 
@@ -66,7 +68,7 @@ curl -X POST \
         "user_id": 933590696,
         "year": 2019,
         "title": "Urlaubsanspruch 80%",
-        "hours": 160,
+        "days": 20,
       }'
 ```
 
@@ -74,8 +76,8 @@ Mandatory fields are marked with a star (\*):
 
 - **year\*** – 2019
 - **title\*** – "Urlaubsanspruch 80%"
-- **hours** – 160
-- **user_id** – 933590696
+- **days\*** – 20
+- **user_id\*** – 933590696
 
 ## PUT /users/holidays/{id}
 
@@ -87,7 +89,7 @@ curl -X PUT \
   -H 'Authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
-        "hours": 175
+        "days": 22
       }'
 ```
 
