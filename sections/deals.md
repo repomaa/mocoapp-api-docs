@@ -35,7 +35,7 @@ The company is optional. The category is only important in status "pending".
   "company": {
     "id": 760260535,
     "name": "Beispiel AG",
-    "type": "Customer"
+    "type": "customer"
   },
   "category": {
     "id": 12,
