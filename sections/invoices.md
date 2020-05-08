@@ -322,5 +322,6 @@ Mandatory fields are marked with a star (\*):
 - **cash_discount** – 2.5 (cash discount in percent)
 - **cash_discount_days** – 5 (cash discount due days)
 - **project_id** – 654321 (ID of the assigned project)
+- **tags** – ["Hosting", "Europe"]
 
 Omitted fields `service_period_from` and `service_period_to` indicates the absences of a service period.
