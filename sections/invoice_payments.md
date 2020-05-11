@@ -72,6 +72,7 @@ Mandatory fields are marked with a star (\*):
 - **invoice_id\*** – 12345
 - **paid_total\*** – 1000
 - **currency** – "EUR"
+- **partially_paid** – true/false
 
 ## POST /invoices/payments/bulk
 
