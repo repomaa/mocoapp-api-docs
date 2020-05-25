@@ -9,6 +9,7 @@ The project representation contains, among the standard fields, also:
 - custom properties
 - project leader (user)
 - customer
+- deal (optional)
 - tasks (services)
 - contracts (assigned staff)
 
@@ -42,6 +43,10 @@ The attributes `hourly_rate` and `billing_variant` are linked. By choosing the b
   customer: {
     id: 1233434,
     name: "Beispiel AG"
+  },
+  deal: {
+    id: 5635453,
+    name: "Website Relaunch"
   },
   tasks: [
     {
