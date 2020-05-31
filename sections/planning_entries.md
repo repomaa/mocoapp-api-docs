@@ -105,11 +105,7 @@ curl -X PUT \
   -H 'Authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
-        "project_id": 4322,
-        "starts_on": "2020-05-20",
-        "ends_on": "2020-05-30",
-        "hours_per_day": 5,
-        "comment": ""
+        "hours_per_day": 5
       }'
 ```
 
