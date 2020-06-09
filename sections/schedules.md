@@ -9,7 +9,7 @@ The planning entry representation contains among the standard fields also:
 - assignment (project assignment or absence)
 - assigned user (staff)
 
-```json5
+```json
 {
   "id": 123,
   "date": "2017-06-14",

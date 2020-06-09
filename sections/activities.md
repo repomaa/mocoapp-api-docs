@@ -13,7 +13,7 @@ Activities contain among the standard fields also:
 
 Attributes `remote_service`, `remote_id` und `remote_url` are set by the MOCO Browser extension and represent a ticket in an external system (Trello, Jira, etc.) that this activity's time was spent on.
 
-```json5
+```json
 {
   "id": 982237015,
   "date": "2018-07-03",

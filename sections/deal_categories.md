@@ -6,7 +6,7 @@ German: "Akquise-Stufen"
 
 The deal category representation is:
 
-```json5
+```json
 {
   "id": 123,
   "name": "Contact",

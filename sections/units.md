@@ -8,7 +8,7 @@ The representation contains among the standard fields also:
 
 - users (staff assigned to this team)
 
-```json5
+```json
 {
   "id": 909147861,
   "name": "C Office",

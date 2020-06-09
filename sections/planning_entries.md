@@ -9,7 +9,7 @@ The planning entry representation contains among the standard fields also:
 - assigned user (staff)
 - project
 
-```json5
+```json
 
 {
   "id":4839,

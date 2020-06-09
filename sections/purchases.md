@@ -12,7 +12,7 @@ Includes among the standard fields for purchases also:
 - User
 - Items
 
-```json5
+```json
 {
   "id": 987,
   "identifier": "E2016-0001",

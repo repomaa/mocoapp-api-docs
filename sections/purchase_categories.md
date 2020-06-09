@@ -6,7 +6,7 @@ German: "Ausgaben – Kategorien"
 
 The purchase category representation is:
 
-```json5
+```json
 {
   "id": 123,
   "name": "Travel expenses",

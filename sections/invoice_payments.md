@@ -6,7 +6,7 @@ German: "Rechnungen / Zahlungen"
 
 The invoice payment representation contains among standard fields also shortened invoice information.
 
-```json5
+```json
 {
   "id": 123,
   "date": "2017-10-01",

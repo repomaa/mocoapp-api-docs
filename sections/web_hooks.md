@@ -2,7 +2,7 @@
 
 ## Attributes
 
-```json5
+```json
 {
   "id": 123,
   "target": "Activity",

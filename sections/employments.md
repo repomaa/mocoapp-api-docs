@@ -8,13 +8,13 @@ Employments contain among the standard fields also:
 
 - User
 
-```json5
+```json
 {
   "id": 982237015,
   "weekly_target_hours": 29.75,
   "pattern": {
-    "am": [0, 4.25, 4.25, 4.25, 4.25], // Mon - Fri
-    "pm": [0, 4.25, 4.25, 4.25, 0] // Mon - Fri
+    "am": [0, 4.25, 4.25, 4.25, 4.25],
+    "pm": [0, 4.25, 4.25, 4.25, 0]
   },
   "from": "2017-01-01",
   "to": null,

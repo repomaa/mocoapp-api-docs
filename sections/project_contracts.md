@@ -6,7 +6,7 @@ German: "Projekte / Personal"
 
 Assigning staff to a project is defined in Moco as a "contract".
 
-```json5
+```json
 {
   "id": 760253573,
   "user_id": 938487474,

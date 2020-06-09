@@ -12,7 +12,7 @@ The company representation contains among default fields the following features:
 - Projects (shortened)
 - User (shortened)
 
-```json5
+```json
 {
   "id": 760253573,
   "type": "customer",
@@ -40,7 +40,7 @@ The company representation contains among default fields the following features:
   "country_code": "CH",
   "vat_identifier": "DE999999999",
   "default_invoice_due_days": 30,
-  "footer": "<div>Footer text</div>", // appears at the end of invoices
+  "footer": "<div>Footer text</div>",
   "projects": [
     {
       "id": 944504145,
