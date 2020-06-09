@@ -22,8 +22,6 @@ The offer representation contains among the standard fields:
   "tax": 19,
   "gross_total": 15172.5,
   "discount": 10,
-  "created_on": "2017-03-24", // 🚧 DEPRECATED: use created_at
-  "updated_on": "2016-04-12", // 🚧 DEPRECATED: use updated_at
   "salutation": "Hallo Peter<br><br>Folgende Aufwände schätzen wir für die Umsetzung der Komponenten:",
   "footer": "Für Rückfragen stehe ich dir jederzeit gerne zur Verfügung.<br><br>Viele Grüsse<br><br>Tobias",
   "company": {

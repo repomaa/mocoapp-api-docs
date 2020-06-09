@@ -33,8 +33,6 @@ The invoice representation contains among standard fields also:
   "discount": 10,
   "cash_discount": 2.5,
   "cash_discount_days": 5,
-  "created_on": "2017-04-04", // 🚧 DEPRECATED: use created_at
-  "updated_on": "2017-07-10", // 🚧 DEPRECATED: use updated_at
   "debit_number": null,
   "credit_number": null,
   "locked": false,

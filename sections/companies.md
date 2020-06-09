@@ -28,7 +28,6 @@ The company representation contains among default fields the following features:
     "firstname": "Tobias",
     "lastname": "Miesel"
   },
-  "labels": ["Netzwerk", "Druckerei"], // 🚧 DEPRECATED: use tags
   "info": "",
   "custom_properties": {
     "UID": "1234-UID-4567"

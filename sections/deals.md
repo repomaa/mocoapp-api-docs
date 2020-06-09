@@ -8,7 +8,6 @@ The lead representation contains among standard fields also:
 
 - Custom properties, if set
 - User (representative)
-- Customer – DEPRECATED: use Company
 - Company
 - Category
 - Status ("potential", "pending", "won", "lost", "dropped")
