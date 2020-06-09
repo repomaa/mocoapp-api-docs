@@ -14,45 +14,45 @@ The company representation contains among default fields the following features:
 
 ```json5
 {
-  id: 760253573,
-  type: "customer",
-  name: "Beispiel AG",
-  website: "www.beispiel-ag.com",
-  email: "info@beispiel-ag.com",
-  phone: "+49 30 123 45 67",
-  fax: "+49 30 123 45 66",
-  address: "Beispiel AG\nBeispielstrasse 123\n12345 Beispielstadt",
-  tags: ["Netzwerk", "Druckerei"],
-  user: {
-    id: 933589840,
-    firstname: "Tobias",
-    lastname: "Miesel",
+  "id": 760253573,
+  "type": "customer",
+  "name": "Beispiel AG",
+  "website": "www.beispiel-ag.com",
+  "email": "info@beispiel-ag.com",
+  "phone": "+49 30 123 45 67",
+  "fax": "+49 30 123 45 66",
+  "address": "Beispiel AG\nBeispielstrasse 123\n12345 Beispielstadt",
+  "tags": ["Netzwerk", "Druckerei"],
+  "user": {
+    "id": 933589840,
+    "firstname": "Tobias",
+    "lastname": "Miesel"
   },
-  labels: ["Netzwerk", "Druckerei"], // 🚧 DEPRECATED: use tags
-  info: "",
-  custom_properties: {
-    UID: "1234-UID-4567",
+  "labels": ["Netzwerk", "Druckerei"], // 🚧 DEPRECATED: use tags
+  "info": "",
+  "custom_properties": {
+    "UID": "1234-UID-4567"
   },
-  identifier: "36",
-  intern: false,
-  billing_tax: 0,
-  currency: "CHF",
-  country_code: "CH",
-  vat_identifier: "DE999999999",
-  default_invoice_due_days: 30,
-  footer: "<div>Footer text</div>", // appears at the end of invoices
-  projects: [
+  "identifier": "36",
+  "intern": false,
+  "billing_tax": 0,
+  "currency": "CHF",
+  "country_code": "CH",
+  "vat_identifier": "DE999999999",
+  "default_invoice_due_days": 30,
+  "footer": "<div>Footer text</div>", // appears at the end of invoices
+  "projects": [
     {
-      id: 944504145,
-      identifier: "46",
-      name: "Layoutanpassung",
-      active: false,
-      billable: true,
+      "id": 944504145,
+      "identifier": "46",
+      "name": "Layoutanpassung",
+      "active": false,
+      "billable": true
     },
   ],
-  created_at: "2018-10-17T09:33:46Z",
-  updated_at: "2018-10-17T09:33:46Z",
-  debit_number: 10000,
+  "created_at": "2018-10-17T09:33:46Z",
+  "updated_at": "2018-10-17T09:33:46Z",
+  "debit_number": 10000
 }
 ```
 
@@ -141,7 +141,7 @@ curl -X PUT \
   -H 'authorization: Token token=YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
-        "name": "Beispiel GmbH",
+        "name": "Beispiel GmbH"
       }'
 ```
 
