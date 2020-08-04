@@ -247,7 +247,7 @@ The following states are valid: "created", "sent", "overdue", "ignored" – the 
 
 ## POST /invoices
 
-Create a neutral invoice:
+Create an invoice:
 
 ```bash
 curl -X POST \
@@ -323,3 +323,17 @@ Mandatory fields are marked with a star (\*):
 - **tags** – ["Hosting", "Europe"]
 
 Omitted fields `service_period_from` and `service_period_to` indicates the absences of a service period.
+
+Items with `quantity`, `unit` and `unit_price` can be used to select activities or expenses to be billed by this invoice,
+just specify the IDs using respectively `activity_ids` and `expense_ids`, for example:
+
+```json
+{
+  "type": "item",
+  "title": "Design",
+  "quantity": 3,
+  "unit": "h",
+  "unit_price": 150.0,
+  "activity_ids": [1253, 8712]
+}
+```
