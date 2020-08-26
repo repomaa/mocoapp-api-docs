@@ -78,7 +78,7 @@ curl -X POST \
   -H 'Content-Type: application/json' \
   -d '{
         "date": "2018-10-01",
-        "absence_code": "4",
+        "absence_code": "4"
       }'
 ```
 
