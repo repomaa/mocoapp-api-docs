@@ -89,7 +89,7 @@ Mandatory fields are marked with a star (\*):
 - **firstname\*** – "Peter"
 - **lastname\*** – "Muster"
 - **gender\*** – "F", "M" or "U"
-- **customer_id** or **organization_id** – 123
+- **company_id** – 123
 - **title** – "Dr. med."
 - **job_position** – "Account Manager"
 - **mobile_phone** – "+49 177 123 45 67"
