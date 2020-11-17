@@ -13,7 +13,7 @@ The lead representation contains among standard fields also:
 - Category
 - Status ("potential", "pending", "won", "lost", "dropped")
 
-The company is optional. The category is only important in status "pending".
+Company and person are optional. The category is only important in status "pending".
 
 ```json
 {
