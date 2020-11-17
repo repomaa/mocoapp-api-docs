@@ -9,6 +9,7 @@ The lead representation contains among standard fields also:
 - Custom properties, if set
 - User (representative)
 - Company
+- Person
 - Category
 - Status ("potential", "pending", "won", "lost", "dropped")
 
@@ -35,6 +36,10 @@ The company is optional. The category is only important in status "pending".
     "id": 760260535,
     "name": "Beispiel AG",
     "type": "customer"
+  },
+  "person": {
+    "id": 123311,
+    "name": "Max Muster"
   },
   "category": {
     "id": 12,
@@ -103,6 +108,7 @@ Mandatory fields are marked with a star (\*):
 - **user_id\*** – 123
 - **deal_category_id\*** – 456
 - **company_id** – 789
+- **person_id** – 357
 - **info** – "Information for this lead..."
 - **status** – "potential", "pending", "won", "lost" or "dropped" (default: "pending")
 
