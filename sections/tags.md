@@ -9,6 +9,21 @@ The API provides a single endpoint to manage the tags (aka labels) associated to
 The parameter `{entity}` can be one of the following:
 Company, Contact, Project, Deal, Purchase, Invoice, Offer
 
+## GET /taggings
+
+Retrieve the list of tags associated with the entity:
+
+```bash
+curl -X GET \
+  'https://{domain}.mocoapp.com/api/v1/taggings/Project/357'
+```
+
+Returns an array with tag names:
+
+```
+["cool", "on hold"]
+```
+
 ## PATCH /taggings
 
 Add tags to the entity:
