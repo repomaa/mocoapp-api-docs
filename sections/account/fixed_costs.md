@@ -1,4 +1,4 @@
-# Account FixedCosts
+# Fixed costs (Account)
 
 German: "Fixkosten"
 
