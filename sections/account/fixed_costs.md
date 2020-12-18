@@ -6,8 +6,6 @@ German: "Fixkosten"
 
 The representation contains, among the standard fields, also:
 
-- user (creator)
-
 ```json
 {
   "id": 123,
