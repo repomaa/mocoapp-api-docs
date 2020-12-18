@@ -29,13 +29,13 @@ This is the official API documentation for mocoapp.com.
 
 All the entities exposed via the API can be found in their respective sections.
 
-- [Account FixedCosts](sections/account/fixed_costs.md)
 - [Activities](sections/activities.md)
 - [Comments](sections/comments.md)
 - [Companies](sections/companies.md)
 - [Contacts](sections/contacts.md)
 - [Deal Categories](sections/deal_categories.md)
 - [Deals / Leads](sections/deals.md)
+- [Fixed costs (Account)](sections/account/fixed_costs.md)
 - [Hourly Rates](sections/hourly_rates.md)
 - [Invoices](sections/invoices.md)
 - [Invoice Reminders](sections/invoice_reminders.md)
