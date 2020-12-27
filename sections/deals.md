@@ -21,6 +21,7 @@ Company and person are optional. The category is only important in status "pendi
   "name": "Website V2",
   "status": "pending",
   "reminder_date": "2017-05-19",
+  "closed_on": null,
   "money": 61000,
   "currency": "CHF",
   "info": "Interesting Lead!",
@@ -111,6 +112,7 @@ Mandatory fields are marked with a star (\*):
 - **person_id** – 357
 - **info** – "Information for this lead..."
 - **status** – "potential", "pending", "won", "lost" or "dropped" (default: "pending")
+- **closed_on** – "2020-12-27"
 
 ## PUT /deals/{id}
 
