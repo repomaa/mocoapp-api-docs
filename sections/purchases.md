@@ -117,13 +117,13 @@ curl -X POST \
       "currency": "EUR",
       "payment_method": "bank_transfer",
       "receipt_identifier": "XXLA",
-      "custom_properties": { "Various" => "Stuff" },
+      "custom_properties": { "Various": "Stuff" },
       "items": [
         {
           "title": "Ticket",
           "total": 30,
           "tax": 10,
-          "tax_included": true,
+          "tax_included": true
         }
       ],
       "file": {
