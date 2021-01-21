@@ -23,6 +23,7 @@ The attributes `hourly_rate` and `billing_variant` are linked. By choosing the b
   "active": true,
   "billable": true,
   "fixed_price": true,
+  "retainer": false,
   "finish_date": "2018-12-31",
   "currency": "EUR",
   "billing_variant": "project",
@@ -212,6 +213,8 @@ Mandatory fields are marked with a star (\*):
 - **labels** – ["Print", "Digital"] 💡name mismatch, labels/tags are used interchangeably
 - **custom_properties** – {"PO-Nummer": "123-ABC"}
 - **info** – "Info for this project"
+- **fixed_price** – true/false (fixed price/time and material)
+- **retainer** – true/false 💡 if `true`, MOCO automatically sets `fixed_price=true`
 
 ## PUT /projects/{id}
 
