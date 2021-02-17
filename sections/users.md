@@ -2,6 +2,18 @@
 
 German: "Personal"
 
+<!-- TOC -->
+
+- [Attributes](#attributes)
+- [GET /users](#get-users)
+- [GET /users/{id}](#get-usersid)
+- [POST /users](#post-users)
+- [PUT /users/{id}](#put-usersid)
+- [DELETE /users/{id}](#delete-usersid)
+- [GET /users/{id}/performance_report](#get-usersidperformance_report)
+
+<!-- /TOC -->
+
 ## Attributes
 
 ```json
@@ -120,3 +132,118 @@ curl -X DELETE \
   'https://{domain}.mocoapp.com/api/v1/users/{id}' \
   -H 'Authorization: Token token=YOUR_API_KEY'
 ```
+
+## GET /users/{id}/performance_report
+
+Retrieve a report on tracked hours vs target hours:
+
+```bash
+curl -X GET \
+  'https://{domain}.mocoapp.com/api/v1/users/{id}/performance_report' \
+  -H 'Authorization: Token token=YOUR_API_KEY'
+```
+
+This returns a performance report for this user:
+
+```json
+{
+  "annually": {
+    "year": 2021,
+    "employment_hours": 1670.4,
+    "target_hours": 1606.4,
+    "hours_tracked_total": 210.95,
+    "variation": -1395.45,
+    "variation_until_today": -0.25
+  },
+  "monthly": [
+    {
+      "year": 2021,
+      "month": 1,
+      "target_hours": 128.0,
+      "hours_tracked_total": 133.71,
+      "variation": 5.71
+    },
+    {
+      "year": 2021,
+      "month": 2,
+      "target_hours": 128.0,
+      "hours_tracked_total": 77.24,
+      "variation": -50.76
+    },
+    {
+      "year": 2021,
+      "month": 3,
+      "target_hours": 115.2,
+      "hours_tracked_total": 0.0,
+      "variation": -115.2
+    },
+    {
+      "year": 2021,
+      "month": 4,
+      "target_hours": 128.0,
+      "hours_tracked_total": 0.0,
+      "variation": -128.0
+    },
+    {
+      "year": 2021,
+      "month": 5,
+      "target_hours": 121.6,
+      "hours_tracked_total": 0.0,
+      "variation": -121.6
+    },
+    {
+      "year": 2021,
+      "month": 6,
+      "target_hours": 140.8,
+      "hours_tracked_total": 0.0,
+      "variation": -140.8
+    },
+    {
+      "year": 2021,
+      "month": 7,
+      "target_hours": 140.8,
+      "hours_tracked_total": 0.0,
+      "variation": -140.8
+    },
+    {
+      "year": 2021,
+      "month": 8,
+      "target_hours": 140.8,
+      "hours_tracked_total": 0.0,
+      "variation": -140.8
+    },
+    {
+      "year": 2021,
+      "month": 9,
+      "target_hours": 140.8,
+      "hours_tracked_total": 0.0,
+      "variation": -140.8
+    },
+    {
+      "year": 2021,
+      "month": 10,
+      "target_hours": 134.4,
+      "hours_tracked_total": 0.0,
+      "variation": -134.4
+    },
+    {
+      "year": 2021,
+      "month": 11,
+      "target_hours": 140.8,
+      "hours_tracked_total": 0.0,
+      "variation": -140.8
+    },
+    {
+      "year": 2021,
+      "month": 12,
+      "target_hours": 147.2,
+      "hours_tracked_total": 0.0,
+      "variation": -147.2
+    }
+  ]
+}
+```
+
+The following parameters can be supplied:
+
+- **year** – e.g. 2021 (empty = current year)
