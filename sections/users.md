@@ -2,12 +2,17 @@
 
 German: "Personal"
 
+<!-- TOC -->
+
+- [Attributes](#attributes)
 - [GET /users](#get-users)
 - [GET /users/{id}](#get-usersid)
 - [POST /users](#post-users)
 - [PUT /users/{id}](#put-usersid)
 - [DELETE /users/{id}](#delete-usersid)
-- [GET /users/{id}/performance_report](#get-usersidperformancereport)
+- [GET /users/{id}/performance_report](#get-usersidperformance_report)
+
+<!-- /TOC -->
 
 ## Attributes
 
