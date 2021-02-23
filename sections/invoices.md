@@ -2,19 +2,18 @@
 
 German: "Rechnungen"
 
-<!-- TOC -->
+<!-- TOC depthfrom:2 -->
 
-- [Invoices](#invoices)
-  - [Attributes](#attributes)
-  - [GET /invoices](#get-invoices)
-  - [GET /invoices/locked](#get-invoiceslocked)
-  - [GET /invoices/{id}](#get-invoicesid)
-  - [GET /invoices/{id}.pdf](#get-invoicesidpdf)
-  - [GET /invoices/{id}/timesheet](#get-invoicesidtimesheet)
-  - [GET /invoices/{id}/timesheet.pdf](#get-invoicesidtimesheetpdf)
-  - [PUT /invoices/{id}/update_status](#put-invoicesidupdate_status)
-  - [POST /invoices](#post-invoices)
-  - [POST /invoices/{id}/send_email](#post-invoicesidsend_email)
+- [Attributes](#attributes)
+- [GET /invoices](#get-invoices)
+- [GET /invoices/locked](#get-invoiceslocked)
+- [GET /invoices/{id}](#get-invoicesid)
+- [GET /invoices/{id}.pdf](#get-invoicesidpdf)
+- [GET /invoices/{id}/timesheet](#get-invoicesidtimesheet)
+- [GET /invoices/{id}/timesheet.pdf](#get-invoicesidtimesheetpdf)
+- [PUT /invoices/{id}/update_status](#put-invoicesidupdate_status)
+- [POST /invoices](#post-invoices)
+- [POST /invoices/{id}/send_email](#post-invoicesidsend_email)
 
 <!-- /TOC -->
 
