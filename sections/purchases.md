@@ -43,7 +43,7 @@ Includes among the standard fields for purchases also:
   "gross_total": 46.0,
   "currency": "CHF",
   "file_url": null,
-  "custom_properties": {"Various": "some stuff"}
+  "custom_properties": {"Various": "some stuff"},
   "tags": ["Transportation"],
   "company": {
     "id":5552,
