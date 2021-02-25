@@ -2,13 +2,14 @@
 
 German: "Rechnungen"
 
-<!-- TOC -->
+<!-- TOC depthfrom:2 -->
 
 - [Attributes](#attributes)
 - [GET /invoices](#get-invoices)
 - [GET /invoices/locked](#get-invoiceslocked)
 - [GET /invoices/{id}](#get-invoicesid)
 - [GET /invoices/{id}.pdf](#get-invoicesidpdf)
+- [GET /invoices/{id}/timesheet](#get-invoicesidtimesheet)
 - [GET /invoices/{id}/timesheet.pdf](#get-invoicesidtimesheetpdf)
 - [PUT /invoices/{id}/update_status](#put-invoicesidupdate_status)
 - [POST /invoices](#post-invoices)
@@ -226,6 +227,58 @@ Additionally, the following parameters can be supplied:
 - **blank** – (to get the invoice without the letter paper)
 
 This returns this invoice's PDF document.
+
+## GET /invoices/{id}/timesheet
+
+Retrieve a time sheet for a particular invoice, i.e. all activities that were invoiced.
+
+```bash
+curl -X GET \
+  'https://{domain}.mocoapp.com/api/v1/invoices/{id}/timesheet' \
+  -H 'Authorization: Token token=YOUR_API_KEY'
+```
+
+This returns a list of activities:
+
+```json
+[
+  {
+    "id": 988913748,
+    "date": "2021-01-25",
+    "hours": 4.0,
+    "description": "Description",
+    "billed": true,
+    "billable": true,
+    "tag": "",
+    "remote_service": "trello",
+    "remote_id": "0FhzirkJ",
+    "remote_url": "https://trello.com/c/0FhziaBc/1-test",
+    "project": {
+      "id": 944807389,
+      "name": "Pitch Project",
+      "billable": true
+    },
+    "task": {
+      "id": 2262446,
+      "name": "Design / UX",
+      "billable": true
+    },
+    "customer": {
+      "id": 760255659,
+      "name": "Acme Corp."
+    },
+    "user": {
+      "id": 933618783,
+      "firstname": "Doe",
+      "lastname": "Jane"
+    },
+    "timer_started_at": null,
+    "created_at": "2021-02-26T10:48:28Z",
+    "updated_at": "2021-02-26T11:42:47Z",
+    "hourly_rate": 150.0
+  }
+]
+```
 
 ## GET /invoices/{id}/timesheet.pdf
 
