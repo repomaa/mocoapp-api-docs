@@ -37,24 +37,24 @@ Includes among the standard fields for purchases also:
   "due_date": null,
   "service_period_from": "2020-02-28",
   "service_period_to": "2020-02-28",
-  "status":"pending",
+  "status": "pending",
   "payment_method": "bank_transfer",
   "net_total": 44.88,
   "gross_total": 46.0,
   "currency": "CHF",
   "file_url": null,
-  "custom_properties": {"Various": "some stuff"},
+  "custom_properties": { "Various": "some stuff" },
   "tags": ["Transportation"],
   "company": {
-    "id":5552,
+    "id": 5552,
     "name": "Schweizerische Bundesbahnen SBB",
-    "iban":"CH3908704016075473007"
+    "iban": "CH3908704016075473007"
   },
   "payments": [],
   "user": {
-    "id":433109936,
-    "firstname":"Mario",
-    "name":"Rossi"
+    "id": 433109936,
+    "firstname": "Mario",
+    "name": "Rossi"
   },
   "items": [
     {
@@ -75,7 +75,6 @@ Includes among the standard fields for purchases also:
   ],
   "created_at": "2018-10-17T09:33:46Z",
   "updated_at": "2018-10-17T09:33:46Z"
-,
 }
 ```
 
@@ -95,10 +94,11 @@ It's also possible to filter:
 - **category_id** – identifier of the purchases' category,
 - **term** – full text search on purchase positions,
 - **company_id** – identifier of the supplier, pass _0_ to get the purchases not associated to a supplier,
-- **status** – "pending" or "approved",
+- **status** – "pending" or "approved"
 - **tags** – "Transportation, Restaurants" (comma separated list)
 - **date** – date range in the form _2020-02-01:2020-02-22_
 - **unpaid** – filter only purchases without a payment
+- **payment_method** – possible values are: "bank_transfer", "direct_debit", "credit_card", "paypal" or "cash"
 
 Returns an array with all purchases information (see attributes).
 
