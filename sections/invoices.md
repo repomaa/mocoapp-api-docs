@@ -21,6 +21,7 @@ German: "Rechnungen"
 
 The invoice representation contains among standard fields also:
 
+- custom properties
 - positions (items)
 - position types ("title", "description", "item", "subtotal", "page-break" or "separator")
 - payments
@@ -53,6 +54,9 @@ The invoice representation contains among standard fields also:
   "locked": false,
   "salutation": "<div>Wir erlauben uns, Ihnen Folgendes in Rechnung zu stellen:</div>",
   "footer": "<div>Zahlbar ohne Abzug innert 20 Tagen.<br><br>Kontoverbindung...<br><br><br>Herzlichen Dank für Ihren Auftrag.</div>",
+  "custom_properties": {
+    "ext-ref": "3421"
+  },
   "items": [
     {
       "id": 387469,
@@ -387,6 +391,7 @@ Mandatory fields are marked with a star (\*):
 - **cash_discount** – 2.5 (cash discount in percent)
 - **cash_discount_days** – 5 (cash discount due days)
 - **project_id** – 654321 (ID of the assigned project)
+- **custom_properties** – {"ext-ref": "5433"}
 - **tags** – ["Hosting", "Europe"]
 
 Omitted fields `service_period_from` and `service_period_to` indicates the absences of a service period.

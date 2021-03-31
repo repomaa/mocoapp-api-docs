@@ -17,6 +17,7 @@ German: "Angebote"
 
 The offer representation contains among the standard fields:
 
+- custom properties
 - positions (items)
 - position types ("title", "description", "item", "subtotal", "page-break" or "separator")
 
@@ -35,6 +36,9 @@ The offer representation contains among the standard fields:
   "discount": 10,
   "salutation": "Hallo Peter<br><br>Folgende Aufwände schätzen wir für die Umsetzung der Komponenten:",
   "footer": "Für Rückfragen stehe ich dir jederzeit gerne zur Verfügung.<br><br>Viele Grüsse<br><br>Tobias",
+  "custom_properties": {
+    "ext-ref": "3421"
+  },
   "company": {
     "id": 1234,
     "name": "Acme Corp."
@@ -217,6 +221,7 @@ Mandatory fields are marked with a star (\*):
 - **footer** (footer text)
 - **discount** – 10 (discount in percent)
 - **contact_id** – 123456 (ID of the associated contact)
+- **custom_properties** – {"ext-ref": "3421"}
 
 ## PUT /offers/{id}/update_status
 
