@@ -10,6 +10,7 @@ German: "Projekte / Leistungen"
 - [POST /projects/{id}/tasks](#post-projectsidtasks)
 - [PUT /projects/{id}/tasks/{id}](#put-projectsidtasksid)
 - [DELETE /projects/{id}/tasks/{id}](#delete-projectsidtasksid)
+- [DELETE /projects/{id}/tasks/bulk_destroy](#delete-projectsidtasksbulkdestroy)
 
 <!-- /TOC -->
 
@@ -98,5 +99,15 @@ Fields are analogous to the POST request.
 ```bash
 curl -X DELETE \
   'https://{domain}.mocoapp.com/api/v1/projects/{id}/tasks/{id}' \
+  -H 'Authorization: Token token=YOUR_API_KEY'
+```
+
+## DELETE /projects/{id}/tasks/bulk_destroy
+
+⚠ Not deletable tasks on a project will be skipped.
+
+```bash
+curl -X DELETE \
+  'https://{domain}.mocoapp.com/api/v1/projects/{id}/tasks/bulk_destroy' \
   -H 'Authorization: Token token=YOUR_API_KEY'
 ```
