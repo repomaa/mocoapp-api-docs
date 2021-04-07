@@ -10,7 +10,7 @@ German: "Projekte / Leistungen"
 - [POST /projects/{id}/tasks](#post-projectsidtasks)
 - [PUT /projects/{id}/tasks/{id}](#put-projectsidtasksid)
 - [DELETE /projects/{id}/tasks/{id}](#delete-projectsidtasksid)
-- [DELETE /projects/{id}/tasks/bulk_destroy](#delete-projectsidtasksbulkdestroy)
+- [DELETE /projects/{id}/tasks/bulk_destroy](#delete-projectsidtasksbulk_destroy)
 
 <!-- /TOC -->
 
