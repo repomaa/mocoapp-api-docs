@@ -10,7 +10,7 @@ German: "Projekte / Leistungen"
 - [POST /projects/{id}/tasks](#post-projectsidtasks)
 - [PUT /projects/{id}/tasks/{id}](#put-projectsidtasksid)
 - [DELETE /projects/{id}/tasks/{id}](#delete-projectsidtasksid)
-- [DELETE /projects/{id}/tasks/bulk_destroy](#delete-projectsidtasksbulk_destroy)
+- [DELETE /projects/{id}/tasks/destroy_all](#delete-projectsidtasksdestroy_all)
 
 <!-- /TOC -->
 
@@ -102,12 +102,12 @@ curl -X DELETE \
   -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
-## DELETE /projects/{id}/tasks/bulk_destroy
+## DELETE /projects/{id}/tasks/destroy_all
 
 ⚠ Not deletable tasks on a project will be skipped.
 
 ```bash
 curl -X DELETE \
-  'https://{domain}.mocoapp.com/api/v1/projects/{id}/tasks/bulk_destroy' \
+  'https://{domain}.mocoapp.com/api/v1/projects/{id}/tasks/destroy_all' \
   -H 'Authorization: Token token=YOUR_API_KEY'
 ```
