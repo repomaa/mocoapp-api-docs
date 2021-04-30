@@ -120,7 +120,8 @@ Mandatory fields are marked with a star (\*):
 - **date\*** – "2017-06-11"
 - **project_id\*** – 123456
 - **task_id\*** – 234567
-- **hours\*** – 1.0 💡passing 0 will start a timer if date is today
+- **hours\*** – 1.0 💡 passing 0 will start a timer if date is today
+- **seconds** – 3600 💡 to avoid rounding issues, instead of hours you can also pass seconds
 - **description** – "Analysis context and dependencies"
 - **billable** – true/false (default: `true` or dependent on project configuration)
 - **tag** – "RMT-123" (any tag as a string)
