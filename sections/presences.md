@@ -26,6 +26,7 @@ Presences contain among the standard fields also:
   "date": "2018-07-03",
   "from": "07:30",
   "to": "13:15",
+  "is_home_office": true,
   "user": {
     "id": 933590696,
     "firstname": "John",
@@ -52,6 +53,7 @@ The following parameters can be supplied:
 
 - **from, to** – "2018-06-01", "2018-06-30" (from and to have to be provided together)
 - **user_id** – 123
+- **is_home_office** – true/false
 
 ## GET /users/presences/{id}
 
@@ -86,6 +88,7 @@ Mandatory fields are marked with a star (\*):
 - **date\*** – "2018-06-11"
 - **from\*** – "08:00"
 - **to** – "12:30" (End time, can be left blank)
+- **is_home_office** – true/false (default: `false`, will set the whole day)
 
 ## POST /users/presences/touch
 
@@ -97,7 +100,7 @@ curl -X POST \
   -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
-A first request at 9:30 AM creates a presence with `from="09:30"`, a second request at 11:30 AM sets `to="11:30"` of the previous presence.
+A first request at 9:30 AM creates a presence with `from="09:30"`, a second request at 11:30 AM sets `to="11:30"` of the previous presence. Field `is_home_office` can be passed to the request as well.
 
 ⚠ There are two special situations to take into consideration:
 
