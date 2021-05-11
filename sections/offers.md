@@ -161,7 +161,7 @@ curl -X GET \
   -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
-This returns a single offer representation, including positions.
+This returns a single offer representation, including internal contact and positions.
 
 ## GET /offers/{id}.pdf
 
