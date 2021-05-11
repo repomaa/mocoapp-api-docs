@@ -214,7 +214,7 @@ curl -X GET \
   -H 'Authorization: Token token=YOUR_API_KEY'
 ```
 
-This returns a single invoice representation, including positions, payments and reminders.
+This returns a single invoice representation, including internal contact, positions, payments and reminders.
 
 ## GET /invoices/{id}.pdf
 
