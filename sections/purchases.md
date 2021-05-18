@@ -155,6 +155,7 @@ Mandatory fields are marked with a star (\*):
   - **total\*** – 30
   - **tax\*** – 7.7 (tax percentage)
   - **tax_included** – true (specify if the total includes the tax or not)
+  - **category_id** – 123 (reference to a purchase category)
 - **due_date** – "2020-02-18"
 - **service_period_from** – "2020-01-01"
 - **service_period_to** – "2020-01-31"
