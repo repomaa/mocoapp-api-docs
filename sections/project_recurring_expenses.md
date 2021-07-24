@@ -37,7 +37,7 @@ The representation contains, among the standard fields, also:
   "currency": "CHF",
   "budget_relevant": true,
   "billable": true,
-  "billing_in_advance": true,
+  "service_period_direction": "forward",
   "custom_properties": {
     "Type": "Website"
   },
@@ -80,6 +80,7 @@ curl -X POST \
   -d '{
         "start_date": "2018-10-01",
         "period": "monthly",
+        "service_period_direction": "forward",
         "title": "Hosting XS",
         "quantity": 1,
         "unit": "Server",
@@ -101,7 +102,7 @@ Mandatory fields are marked with a star (\*):
 - **description** – "Hosting, Monitoring, Backup"
 - **billable** – true/false (default: true)
 - **budget_relevant** – true/false (default: false)
-- **billing_in_advance** – true/false (default: true)
+- **service_period_direction** – "none", "forward", "backward" (default: "none")
 - **custom_properties** – {"Type": "Website"}
 
 ## PUT /projects/{id}/recurring_expenses/{id}
