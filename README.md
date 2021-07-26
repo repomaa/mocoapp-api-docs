@@ -254,6 +254,16 @@ $ echo -n '{id: 111, description: "a description"}' | openssl sha256 -hmac "1d60
 (stdin)= 09f9ebc0adeb597cb7cb37fd72b20be0caeca6bd9fb67416b663606bd7f89183
 ```
 
+And with NodeJS:
+
+```javascript
+const crypto = require("crypto")
+const hmac = crypto.createHmac("sha256", "1d608b9d72219b90ff2393a1d3ee0ac0")
+const data = hmac.update('{id: 111, description: "a description"}')
+const digest = data.digest("hex")
+console.log("digest = " + digest)
+```
+
 - We expect a successful response code for the Webhook request (i.e. any 2XX code), otherwise it's considered a failure
   and it's retried.
 - After 500 consecutive failures a Webhook is automatically disabled.
