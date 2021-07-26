@@ -230,9 +230,9 @@ X-Moco-Signature: f457bffc50e9b63f455ab107c55f2f61956550aa5525c2cfe07f574014bd8a
 X-Moco-User-Id: 933613686
 ```
 
-- We recommend https://requestbin.com/ for WebHook development – this services provides you with temporary
+- To debug and try out web hooks, we recommend https://webhook.site or https://requestbin.com/ – this services provides you with temporary
   HTTPS URLs that let you inspect any incoming WebHook data.
-- WebHooks are only provided to customers after the trial phase.
+- WebHooks are only provided to customers after they subscribe to MOCO.
 - WebHooks are not guaranteed to be delivered in order. Pay attention to the provided time stamp if this is important
   for your use case.
 - The signature uses HMAC with SHA256 to sign the whole payload. The key for the signature is the 32 characters
@@ -240,7 +240,14 @@ X-Moco-User-Id: 933613686
   
 ### Calculating the signature
 
-Sample code (Ruby) to calculate the payload signature:
+OpenSSL CLI:
+
+```bash
+$ echo -n '{id: 111, description: "a description"}' | openssl sha256 -hmac "1d608b9d72219b90ff2393a1d3ee0ac0"
+(stdin)= 09f9ebc0adeb597cb7cb37fd72b20be0caeca6bd9fb67416b663606bd7f89183
+```
+
+Ruby:
 
 ```ruby
 payload = '{id: 111, description: "a description"}'
@@ -249,14 +256,7 @@ payload_signature = OpenSSL::HMAC.hexdigest("SHA256", signature_key, payload)
 # => "09f9ebc0adeb597cb7cb37fd72b20be0caeca6bd9fb67416b663606bd7f89183"
 ```
 
-The same is possible with the OpenSSL CLI:
-
-```bash
-$ echo -n '{id: 111, description: "a description"}' | openssl sha256 -hmac "1d608b9d72219b90ff2393a1d3ee0ac0"
-(stdin)= 09f9ebc0adeb597cb7cb37fd72b20be0caeca6bd9fb67416b663606bd7f89183
-```
-
-And with NodeJS:
+NodeJS:
 
 ```javascript
 const crypto = require("crypto")
