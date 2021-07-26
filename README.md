@@ -241,12 +241,10 @@ X-Moco-User-Id: 933613686
 Sample code (Ruby) to calculate the payload signature:
 
 ```ruby
-irb(main):002:0> payload = '{id: 111, description: "a description"}'
-=> "{id: 111, description: \"a description\"}"
-irb(main):003:0> signature_key = "1d608b9d72219b90ff2393a1d3ee0ac0"
-=> "1d608b9d72219b90ff2393a1d3ee0ac0"
-irb(main):004:0> payload_signature = OpenSSL::HMAC.hexdigest("SHA256", signature_key, payload)
-=> "09f9ebc0adeb597cb7cb37fd72b20be0caeca6bd9fb67416b663606bd7f89183"
+payload = '{id: 111, description: "a description"}'
+signature_key = "1d608b9d72219b90ff2393a1d3ee0ac0"
+payload_signature = OpenSSL::HMAC.hexdigest("SHA256", signature_key, payload)
+# => "09f9ebc0adeb597cb7cb37fd72b20be0caeca6bd9fb67416b663606bd7f89183"
 ```
 
 - We expect a successful response code for the Webhook request (i.e. any 2XX code), otherwise it's considered a failure
