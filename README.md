@@ -237,6 +237,8 @@ X-Moco-User-Id: 933613686
   for your use case.
 - The signature uses HMAC with SHA256 to sign the whole payload. The key for the signature is the 32 characters
   hexadecimal string displayed in the web hook overview.
+  
+### Calculating the signature
 
 Sample code (Ruby) to calculate the payload signature:
 
@@ -263,6 +265,8 @@ const data = hmac.update('{id: 111, description: "a description"}')
 const digest = data.digest("hex")
 console.log("digest = " + digest)
 ```
+
+### Notes
 
 - We expect a successful response code for the Webhook request (i.e. any 2XX code), otherwise it's considered a failure
   and it's retried.
