@@ -57,6 +57,7 @@ The invoice representation contains among standard fields also:
   "custom_properties": {
     "ext-ref": "3421"
   },
+  "tags": ["Postversand"],
   "items": [
     {
       "id": 387469,
