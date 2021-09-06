@@ -55,6 +55,8 @@ The representation contains, among the standard fields, also the following field
     "id": 1234,
     "name": "Project A"
   },
+  "purchase_id": 123456,
+  "purchase_item_id": 234567,
   "created_at": "2018-10-17T09:33:46Z",
   "updated_at": "2018-10-17T09:33:46Z"
 }
