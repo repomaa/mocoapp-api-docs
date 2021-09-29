@@ -39,6 +39,7 @@ The attributes `hourly_rate` and `billing_variant` are linked. By choosing the b
   "billable": true,
   "fixed_price": true,
   "finish_date": "2018-12-31",
+  "color": "#CCCC00",
   "currency": "EUR",
   "billing_variant": "project",
   "billing_address": "Beispiel AG\nHerr Maier\nBeispielstrasse...",
