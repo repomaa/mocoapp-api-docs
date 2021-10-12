@@ -7,6 +7,7 @@ This is the official API documentation for mocoapp.com.
 - [General](#general)
 - [Entities](#entities)
 - [Authentication](#authentication)
+- [Postman example](#postman-example)
 - [Client Implementations / API Wrappers](#client-implementations--api-wrappers)
 - [Impersonation](#impersonation)
 - [Rate Limiting](#rate-limiting)
@@ -15,6 +16,8 @@ This is the official API documentation for mocoapp.com.
 - [Sorting](#sorting)
 - [Custom Fields](#custom-fields)
 - [WebHooks](#webhooks)
+  - [Calculating the signature](#calculating-the-signature)
+  - [Notes](#notes)
 
 <!-- /TOC -->
 
@@ -105,6 +108,11 @@ If the key is valid, the response code id `200 ok` and the body is:
 ```
 
 otherwise the response code is `401 unauthorized`.
+
+## Postman example
+
+There are a few tools to try out the MOCO API. All the examples in this documentation use `curl` to demonstrate the API endpoint.
+A popular graphical UI for REST is [Postman](https://www.postman.com/). Here's an example request for the projects list including the authentication:
 
 ## Client Implementations / API Wrappers
 
@@ -237,7 +245,7 @@ X-Moco-User-Id: 933613686
   for your use case.
 - The signature uses HMAC with SHA256 to sign the whole payload. The key for the signature is the 32 characters
   hexadecimal string displayed in the web hook overview.
-  
+
 ### Calculating the signature
 
 OpenSSL CLI:
@@ -259,11 +267,11 @@ payload_signature = OpenSSL::HMAC.hexdigest("SHA256", signature_key, payload)
 NodeJS:
 
 ```javascript
-const crypto = require("crypto")
-const hmac = crypto.createHmac("sha256", "1d608b9d72219b90ff2393a1d3ee0ac0")
-const data = hmac.update('{id: 111, description: "a description"}')
-const digest = data.digest("hex")
-console.log("digest = " + digest)
+const crypto = require("crypto");
+const hmac = crypto.createHmac("sha256", "1d608b9d72219b90ff2393a1d3ee0ac0");
+const data = hmac.update('{id: 111, description: "a description"}');
+const digest = data.digest("hex");
+console.log("digest = " + digest);
 ```
 
 ### Notes
