@@ -114,6 +114,8 @@ otherwise the response code is `401 unauthorized`.
 There are a few tools to try out the MOCO API. All the examples in this documentation use `curl` to demonstrate the API endpoint.
 A popular graphical UI for REST is [Postman](https://www.postman.com/). Here's an example request for the projects list including the authentication:
 
+![Postman example request](moco-api-postman.png "Postman example request")
+
 ## Client Implementations / API Wrappers
 
 Here's a list of API client implementations, not maintained by us. Feel free to open up a PR to point to your implementation so others can re-use it.
