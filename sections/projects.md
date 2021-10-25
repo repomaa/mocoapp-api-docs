@@ -247,7 +247,13 @@ Fields are analogous to the POST request, except for `currency` which cannot be 
 
 ## DELETE /projects/{id}
 
-⚠ Deleting a project is not possible via API!
+⚠ Deletes a project. It's possible only if there are no activities, invoices, offers or expenses.
+
+```bash
+curl -X DELETE \
+  'https://{domain}.mocoapp.com/api/v1/projects/{id}' \
+  -H 'Authorization: Token token=YOUR_API_KEY'
+```
 
 ## PUT /projects/{id}/archive
 
