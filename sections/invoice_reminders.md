@@ -82,11 +82,13 @@ curl -X POST \
 Mandatory fields are marked with a star (\*):
 
 - **invoice_id\*** – 546046
-- **title\*** – "Mahnung",
-- **text** – "Hallo"
+- **title** – "Mahnung",
+- **text** – "Sehr geehrte Damen und Herren..."
 - **fee** – 50
 - **date** – "2020-08-04"
 - **due_date** – "2020-09-12"
+
+Fields `title` and `text` are optional. If these fields are obmitted the configured default values are taken.
 
 ## DELETE /invoice_reminders/{id}
 
