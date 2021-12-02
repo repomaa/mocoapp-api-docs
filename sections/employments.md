@@ -6,7 +6,10 @@ German: "Wochenmodell"
 
 - [Attributes](#attributes)
 - [GET /users/employments](#get-usersemployments)
+- [POST /users/employments](#post-usersemployments)
 - [GET /users/employments/{id}](#get-usersemploymentsid)
+- [PUT /users/employments/{id}](#put-usersemploymentsid)
+- [DELETE /users/employments/{id}](#delete-usersemploymentsid)
 
 <!-- /TOC -->
 
@@ -53,12 +56,71 @@ The following parameters can be supplied:
 - **from, to** – "2018-01-01", "2018-12-31" (`from` has to be provided, `to` can be left blank for all open ended employments)
 - **user_id** – 123
 
+## POST /users/employments
+
+Create an employment:
+
+```bash
+curl -X POST \
+  'https://{domain}.mocoapp.com/api/v1/users/employments' \
+  -H 'Authorization: Token token=YOUR_API_KEY' \
+  -H 'Content-Type: application/json' \
+  -d '{
+        "user_id": 123,
+        "weekly_target_hours": 29.75,
+        "pattern": {
+          "am": [0, 4.25, 4.25, 4.25, 4.25],
+          "pm": [0, 4.25, 4.25, 4.25, 0]
+        },
+        "from": "2022-01-01",
+        "to": "2022-12-31",
+      }'
+```
+
+Mandatory fields are marked with a star (\*):
+
+- **user_id\*** – 123
+- **pattern\*** – `{ "am": [4, 4, 4, 4, 4], "pm": [4, 4, 4, 4, 4] }` the work hours during morning and afternoon on each workday
+- **from** – "2022-01-01" when the employment comes/came into effect (default: the current date)
+- **to** – "2022-12-31" when the employment stops being in effect (default: unset)
+- **weekly_target_hours** - 29.75
+
 ## GET /users/employments/{id}
 
 Retrieve a single employment:
 
 ```bash
 curl -X GET \
+  'https://{domain}.mocoapp.com/api/v1/users/employments/{id}' \
+  -H 'Authorization: Token token=YOUR_API_KEY'
+```
+
+## PUT /users/employments/{id}
+
+Update an employment:
+
+```bash
+curl -X PUT \
+  'https://{domain}.mocoapp.com/api/v1/users/employments/{id}' \
+  -H 'Authorization: Token token=YOUR_API_KEY' \
+  -H 'Content-Type: application/json' \
+  -d '{
+        "weekly_target_hours": 32,
+        "pattern": {
+          "am": [0, 4, 4, 4, 4],
+          "pm": [0, 4, 4, 4, 4]
+        }
+      }'
+```
+
+Fields are analogous to the POST request but `user_id` and `pattern` are not mandatory.
+
+## DELETE /users/employments/{id}
+
+Delete an employment:
+
+```bash
+curl -X DELETE \
   'https://{domain}.mocoapp.com/api/v1/users/employments/{id}' \
   -H 'Authorization: Token token=YOUR_API_KEY'
 ```
