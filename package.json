@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "This is the official API documentation for mocoapp.com.",
   "scripts": {
-    "dev": "parcel serve src/index.html",
+    "dev": "parcel serve --dist-dir public src/index.html",
     "build": "parcel build --dist-dir public --public-url . src/index.html"
   },
   "repository": {

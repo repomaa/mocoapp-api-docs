@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "MOCO API",
-    "description": "Public REST API for MOCO",
+    "description": "  ## This is the official API documentation for mocoapp.com\n\n  <!-- TOC depthfrom:2 -->\n\n  - [General](#general)\n  - [Entities](#entities)\n  - [Authentication](#authentication)\n  - [Postman example](#postman-example)\n  - [Client Implementations / API Wrappers](#client-implementations--api-wrappers)\n  - [Impersonation](#impersonation)\n  - [Rate Limiting](#rate-limiting)\n  - [Pagination](#pagination)\n  - [Errors and HTTP status codes](#errors-and-http-status-codes)\n  - [Sorting](#sorting)\n  - [Custom Fields](#custom-fields)\n  - [WebHooks](#webhooks)\n    - [Calculating the signature](#calculating-the-signature)\n    - [Notes](#notes)\n\n  <!-- /TOC -->\n\n  <h3 id=\"general\">General</h3>\n\n  - Data to MOCO is sent as JSON (Content-Type: application/json) and also\n    represented as JSON\n  - All requests have to be [authenticated](#authentication) with a user-specific key\n  - Example responses showcase the happy case, i.e. usually the `200 OK` response\n  - Collections are usually [paginated](#pagination)\n  - Zapier triggers are **not** triggered for API requests\n  - Timestamps `created_at` and `updated_at` are sent for all entities in UTC,\n    as ISO8601 format.\n  - For synchronization almost all resources can be filtered by `updated_after`\n    passing a time in UTC, as ISO8601 format.\n  - MOCO does not support any client-libraries at the moment. However, there\n    are currently the following unofficial clients available, which you can use\n    at your risk: [Python Client](https://github.com/sommalia/moco-wrapper)\n\n  <h3 id=\"entities\">Entities</h3>\n\n  All the entities exposed via the API can be found in their respective sections.\n\n  - Account / Fixed Costs\n  - Account / Hourly Rates\n  - Account / Internal Hourly Rates\n  - [Activities](#operations-tag-Activities)\n  - Comments\n  - Companies\n  - Contacts\n  - Deal Categories\n  - Deals / Leads\n  - Invoice Payments\n  - Invoice Reminders\n  - Invoices\n  - Offers\n  - Planning Entry (New Planning)\n  - Project Contracts\n  - Project Expenses\n  - Project Payment Schedules\n  - Project Recurring Expenses\n  - Project Tasks\n  - Projects\n  - Purchase Categories\n  - Purchase Drafts\n  - Purchases\n  - Schedules (Absences)\n  - Tags / Labels\n  - Units / Teams\n  - [User Employments](#operations-tag-User_Employments)\n  - User Holidays\n  - User Presences\n  - Users\n  - WebHooks\n  - Reports\n\n  <h3 id=\"authentication\">Authentication</h3>\n\n  You need an API key for authentication. Each user can find their\n  user-specific key on mocoapp.com on their profile in the \"Integrations\" tab.\n  This key is provided as an Authorization header.\n\n  ```bash\n  curl -X GET \\\n    'https://{domain}.mocoapp.com/api/v1/projects' \\\n    -H 'Authorization: Bearer token=YOUR_API_KEY'\n  ```\n\n  See [the Session endpoints](#operations-tag-Session) for details.\n\n  <h3 id=\"postman-example\">Postman example</h3>\n\n  There are a few tools to try out the MOCO API. All the examples in this documentation use `curl` to demonstrate the API endpoint.\n  A popular graphical UI for REST is [Postman](https://www.postman.com/). Here's an example request for the projects list including the authentication:\n\n  ![Postman example request](./moco-api-postman.png \"Postman example request\")\n\n  <h3 id=\"client-implementations--api-wrappers\">Client Implementations / API Wrappers</h3>\n\n  Here's a list of API client implementations, not maintained by us. Feel free to open up a PR to point to your implementation so others can re-use it.\n\n  | Language | Repository                                                        |\n  | -------- | :---------------------------------------------------------------: |\n  | Python   | [sommalia/moco-wrapper](https://github.com/sommalia/moco-wrapper) |\n\n  <h3 id=\"impersonation\">Impersonation</h3>\n\n  By default all requests are scoped to the authenticated user. Some resources cannot be written in behalf of other users like `Activities` and `User Presences`. This reflects the behaviour in the UI. But you can login as another user provided that the authenticated user has permission to _Staff_. To achieve the same behaviour in the API, one can set the following x-header:\n\n  `X-IMPERSONATE-USER-ID=123` (user id to act in behalf of)\n\n  <h3 id=\"rate-limiting\">Rate Limiting</h3>\n\n  You can expect to be able to fire 15 requests within a time frame of 15 seconds. If you exceed this limit, the server responds with `429 Too Many Requests`.\n\n  <h3 id=\"pagination\">Pagination</h3>\n\n  Responses are paginated with a common default of 100 entries per page. In the HTTP response header, the current page, the entries per page and the number of total entries is reported. There is also a link header to links to the consecutive page.\n\n  - **X-Page** – 3\n  - **X-Per-Page** – 100\n  - **X-Total** – 415\n  - **Link** – `<https://{domain}.mocoapp.com/api/v1/projects.json?page=4>; rel=\"next\"`\n\n  If there is not Link header with `rel=\"next\"`, the current page is the last page.\n\n  <h3 id=\"errors-and-http-status-codes\">Errors and HTTP status codes</h3>\n\n  The MOCO-API is mostly conformant with the [general HTTP status codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes).\n\n  Here are the most comment errors you will see:\n\n  - **401 Unauthorized** - Check the error message in the response body\n  - **403 Forbidden** - Check your [Authentication](#authentication) or your MOCO user permission\n  - **404 Not Found** - Check that resource exists (maybe it was deleted in the meantime)\n  - **422 Unprocessable Entity** - Check the provided error message in the response body\n  - **429 Too Many Requests** - Check [Rate Limiting](#rate-limiting)\n\n  <h3 id=\"sorting\">Sorting</h3>\n\n  Sorting is controlled by the `sort_by` query parameter. Its value is the field name that should be sorted, followed by an optional sorting order (`asc` or `desc`, default is `asc`).\n\n  Example:\n\n  - `https://{domain}.mocoapp.com/api/v1/offers?sort_by=title desc`\n\n  <h3 id=\"custom-fields\">Custom Fields</h3>\n\n  MOCO supports adding custom fields to many of its resources. These custom fields are readable and writable via the `custom_properties` field.\n\n  ```json\n  \"custom_properties\": {\n      \"UID\": \"123-UID-456\",\n      \"Line of business\": \"Automotive\"\n  },\n  ```\n\n  Parameters are sent with their name as key:\n\n  ```bash\n  curl -X POST \\\n    https://{domain}.mocoapp.com/api/v1/customers \\\n    -H 'Authorization: Token token=YOUR_API_KEY' \\\n    -H 'Content-Type: application/json' \\\n    -d '{\n      \"name\": \"Beispiel AG\",\n      \"currency\": \"CHF\",\n      \"custom_properties\": {\n        \"Line of business\": \"Automotive\"\n      }\n    }'\n  ```\n\n  All values are encoded as strings, expect for Multiple Choice, which is encoded as an array.\n\n  ```bash\n  curl -X POST \\\n    https://{domain}.mocoapp.com/api/v1/customers \\\n    -H 'Authorization: Token token=YOUR_API_KEY' \\\n    -H 'Content-Type: application/json' \\\n    -d '{\n          \"custom_properties\": {\n            \"Line of business\": [\"Automotive\", \"Banking\"]\n          }\n        }'\n  ```\n\n  - Single-line input – \"Automotive\"\n  - Mehrzeilige Eingabe – \"A multiline input...\"\n  - Link – \"https://www...\"\n  - Date – \"2021-12-31\"\n  - Yes/No – \"0\", \"1\" (0 = No, 1 = Yes)\n  - Single choice – \"Value\"\n  - Multiple choice – [\"Value 1\", \"Value 2\"]\n\n  ⚡ **WARNING** ⚡: If you use custom fields, all of them have to be provided. If not, any that are not transmitted will be removed.\n\n  <h3 id=\"webhooks\">WebHooks</h3>\n\n  Using WebHooks, integrating any system in real time becomes possible. Events in MOCO can be assigned subscriptions.\n  Whenever an event triggers, MOCO sends an HTTPS `POST` payload to the WebHook's configured URL with an HMAC SHA265 signature.\n  This way, MOCOs integrity as a legitimate sender of this information can be verified. Additional headers provide context\n  for the sent payload.\n\n  - **X-Moco-Target** – Activity, Customer, Project, ...\n  - **X-Moco-Event** – create, update, delete, archive, ...\n  - **X-Moco-Timestamp** – Timestamp for this event\n  - **X-Moco-Signature** – The signature fo this request, see comment below for details\n  - **X-Moco-User-Id** – The user ID that triggered this hook\n  - The receiver has to process the request within 10 seconds\n\n  The following example shows a WebHook triggered by an activity creation.\n\n  ```\n  X-Moco-Target: Activity\n  X-Moco-Event: create\n  X-Moco-Timestamp: 1527170410463\n  X-Moco-Signature: f457bffc50e9b63f455ab107c55f2f61956550aa5525c2cfe07f574014bd8a9e\n  X-Moco-User-Id: 933613686\n  ```\n\n  - To debug and try out web hooks, we recommend https://webhook.site or https://requestbin.com/ – this services provides you with temporary\n    HTTPS URLs that let you inspect any incoming WebHook data.\n  - WebHooks are only provided to customers after they subscribe to MOCO.\n  - WebHooks are not guaranteed to be delivered in order. Pay attention to the provided time stamp if this is important\n    for your use case.\n  - The signature uses HMAC with SHA256 to sign the whole payload. The key for the signature is the 32 characters\n    hexadecimal string displayed in the web hook overview.\n\n  <h4 id=\"calculating-the-signature\">Calculating the signature</h4>\n\n  OpenSSL CLI:\n\n  ```bash\n  $ echo -n '{id: 111, description: \"a description\"}' | openssl sha256 -hmac \"1d608b9d72219b90ff2393a1d3ee0ac0\"\n  (stdin)= 09f9ebc0adeb597cb7cb37fd72b20be0caeca6bd9fb67416b663606bd7f89183\n  ```\n\n  Ruby:\n\n  ```ruby\n  payload = '{id: 111, description: \"a description\"}'\n  signature_key = \"1d608b9d72219b90ff2393a1d3ee0ac0\"\n  payload_signature = OpenSSL::HMAC.hexdigest(\"SHA256\", signature_key, payload)\n  # => \"09f9ebc0adeb597cb7cb37fd72b20be0caeca6bd9fb67416b663606bd7f89183\"\n  ```\n\n  NodeJS:\n\n  ```javascript\n  const crypto = require(\"crypto\");\n  const hmac = crypto.createHmac(\"sha256\", \"1d608b9d72219b90ff2393a1d3ee0ac0\");\n  const data = hmac.update('{id: 111, description: \"a description\"}');\n  const digest = data.digest(\"hex\");\n  console.log(\"digest = \" + digest);\n  ```\n\n  <h4 id=\"notes\">Notes</h4>\n\n  - We expect a successful response code for the Webhook request (i.e. any 2XX code), otherwise it's considered a failure\n    and it's retried.\n  - After 500 consecutive failures a Webhook is automatically disabled.\n",
     "version": "1.0.0"
   },
   "servers": [
@@ -26,7 +26,7 @@
         "parameters": [
           {
             "name": "from",
-            "description": "from",
+            "description": "only return employments starting after this date",
             "required": false,
             "in": "query",
             "schema": {
@@ -36,7 +36,7 @@
           },
           {
             "name": "to",
-            "description": "to",
+            "description": "only return employments ending before this date",
             "required": false,
             "in": "query",
             "schema": {
@@ -46,7 +46,7 @@
           },
           {
             "name": "user_id",
-            "description": "user_id",
+            "description": "only return employments for a user with this id",
             "required": false,
             "in": "query",
             "schema": {
@@ -56,7 +56,7 @@
         ],
         "responses": {
           "default": {
-            "description": "",
+            "description": "employments",
             "content": {
               "application/json": {
                 "schema": {
@@ -81,12 +81,461 @@
         "x-controller": "api/v1/users/employments",
         "x-action": "index"
       }
+    },
+    "/users/employments/{id}": {
+      "get": {
+        "tags": [
+          "User Employments"
+        ],
+        "operationId": "User Employments-show",
+        "parameters": [
+          {
+            "name": "id",
+            "description": "the id of the employment",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "the employment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Employment"
+                }
+              }
+            }
+          }
+        },
+        "description": "Retrieve a single employment",
+        "summary": "Retrieve a single employment",
+        "security": [
+          {
+            "api_key": [
+
+            ]
+          }
+        ],
+        "x-controller": "api/v1/users/employments",
+        "x-action": "show"
+      }
+    },
+    "/activities": {
+      "get": {
+        "tags": [
+          "Activities"
+        ],
+        "operationId": "Activities-index",
+        "parameters": [
+          {
+            "name": "from",
+            "description": "only return activities after this date",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "project_id",
+            "description": "only return activities for a project with this id",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "task_id",
+            "description": "only return activities for a task with this id",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "to",
+            "description": "only return activities before this date",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "user_id",
+            "description": "only return activities for a user with this id",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "activities",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Activity"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Retrieve all activities",
+        "summary": "Retrieve all activities",
+        "security": [
+          {
+            "api_key": [
+
+            ]
+          }
+        ],
+        "x-controller": "api/v1/activities",
+        "x-action": "index"
+      },
+      "post": {
+        "tags": [
+          "Activities"
+        ],
+        "operationId": "Activities-create",
+        "parameters": [
+
+        ],
+        "responses": {
+          "default": {
+            "description": "the created activity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Activity"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "invalid attributes"
+          }
+        },
+        "description": "Create an activity\n\nEvery activity is created for the user that the API key belongs to",
+        "summary": "Create an activity",
+        "security": [
+          {
+            "api_key": [
+
+            ]
+          }
+        ],
+        "x-controller": "api/v1/activities",
+        "x-action": "create",
+        "requestBody": {
+          "description": "the attributes for the new activity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/WriteActivity"
+                  },
+                  {
+                    "$ref": "#/components/schemas/CreateActivity"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/activities/{id}": {
+      "get": {
+        "tags": [
+          "Activities"
+        ],
+        "operationId": "Activities-show",
+        "parameters": [
+          {
+            "name": "id",
+            "description": "the id of the activity",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "the activity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Activity"
+                }
+              }
+            }
+          }
+        },
+        "description": "Retrieve a single activity",
+        "summary": "Retrieve a single activity",
+        "security": [
+          {
+            "api_key": [
+
+            ]
+          }
+        ],
+        "x-controller": "api/v1/activities",
+        "x-action": "show"
+      },
+      "put": {
+        "tags": [
+          "Activities"
+        ],
+        "operationId": "Activities-update",
+        "parameters": [
+          {
+            "name": "id",
+            "description": "the id of the activity that should be updated",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "the created activity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Activity"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "invalid attributes"
+          }
+        },
+        "description": "Update an activity",
+        "summary": "Update an activity",
+        "security": [
+          {
+            "api_key": [
+
+            ]
+          }
+        ],
+        "x-controller": "api/v1/activities",
+        "x-action": "update",
+        "requestBody": {
+          "description": "the attributes to be changed for the activity",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WriteActivity"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Activities"
+        ],
+        "operationId": "Activities-destroy",
+        "parameters": [
+          {
+            "name": "id",
+            "description": "the id of the activity that should be deleted",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Delete an activity"
+          }
+        },
+        "description": "Delete an activity\n\n⚠️ Deleting an activity is only possible if this activity has not yet been billed or locked.",
+        "summary": "Delete an activity",
+        "security": [
+          {
+            "api_key": [
+
+            ]
+          }
+        ],
+        "x-controller": "api/v1/activities",
+        "x-action": "destroy"
+      }
+    },
+    "/activities/{id}/start_timer": {
+      "patch": {
+        "tags": [
+          "Activities"
+        ],
+        "operationId": "Activities-start_timer",
+        "parameters": [
+          {
+            "name": "id",
+            "description": "the id of the activity for which the timer should be started",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "the activity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Activity"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "the activity's date is not today"
+          }
+        },
+        "description": "Start or continue a timer on an activity\n\n⚠️ The timer is only available for activities on the current day.",
+        "summary": "Start or continue a timer on an activity",
+        "security": [
+          {
+            "api_key": [
+
+            ]
+          }
+        ],
+        "x-controller": "api/v1/activities",
+        "x-action": "start_timer"
+      }
+    },
+    "/activities/{id}/stop_timer": {
+      "patch": {
+        "tags": [
+          "Activities"
+        ],
+        "operationId": "Activities-stop_timer",
+        "parameters": [
+          {
+            "name": "id",
+            "description": "the id of the activity for which the timer should be stopped",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "the activity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Activity"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "the activity's date is not today"
+          }
+        },
+        "description": "Stop a timer on an activity\n\n⚠️ The timer is only available for activities on the current day.",
+        "summary": "Stop a timer on an activity",
+        "security": [
+          {
+            "api_key": [
+
+            ]
+          }
+        ],
+        "x-controller": "api/v1/activities",
+        "x-action": "stop_timer"
+      }
+    },
+    "/activities/disregard": {
+      "post": {
+        "tags": [
+          "Activities"
+        ],
+        "operationId": "Activities-disregard",
+        "parameters": [
+
+        ],
+        "responses": {
+          "default": {
+            "description": "the ids of the disregarded activities",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "invalid attributes"
+          }
+        },
+        "description": "Mark activities as \"already billed\"",
+        "summary": "Mark activities as \"already billed\"",
+        "security": [
+          {
+            "api_key": [
+
+            ]
+          }
+        ],
+        "x-controller": "api/v1/activities",
+        "x-action": "disregard",
+        "requestBody": {
+          "description": "payload",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DisregardActivities"
+              }
+            }
+          }
+        }
+      }
     }
   },
   "tags": [
     {
+      "name": "Activities",
+      "description": "German: \"Zeiteinträge\""
+    },
+    {
       "name": "User Employments",
-      "description": ""
+      "description": "German: \"Wochenmodell\""
     }
   ],
   "components": {
@@ -99,14 +548,30 @@
             "items": {
               "type": "number",
               "format": "float"
-            }
+            },
+            "description": "how the work hours are distributed over a week in the morning",
+            "example": [
+              0,
+              4.25,
+              4.25,
+              4.25,
+              4.25
+            ]
           },
           "pm": {
             "type": "array",
             "items": {
               "type": "number",
               "format": "float"
-            }
+            },
+            "description": "how the work hours are distributed over a week in the afternoon",
+            "example": [
+              0,
+              4.25,
+              4.25,
+              4.25,
+              0
+            ]
           }
         },
         "required": [
@@ -118,13 +583,18 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer"
+            "type": "integer",
+            "description": "the id of the user"
           },
           "firstname": {
-            "type": "string"
+            "type": "string",
+            "description": "the first name of the user",
+            "example": "Jane"
           },
           "lastname": {
-            "type": "string"
+            "type": "string",
+            "description": "the last name of the user",
+            "example": "Doe"
           }
         },
         "required": [
@@ -137,33 +607,41 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer"
+            "type": "integer",
+            "description": "the id of the employment"
           },
           "weekly_target_hours": {
             "type": "number",
-            "format": "float"
+            "format": "float",
+            "description": "the employee's weekly target hours",
+            "example": 29.75
           },
           "pattern": {
             "$ref": "#/components/schemas/EmploymentPattern"
           },
           "from": {
             "type": "string",
-            "format": "date"
+            "format": "date",
+            "description": "when the employment started/starts"
           },
           "to": {
             "type": "string",
-            "format": "date"
+            "format": "date",
+            "description": "when the employment ended/ends",
+            "nullable": true
           },
           "user": {
             "$ref": "#/components/schemas/EmploymentUser"
           },
           "created_at": {
             "type": "string",
-            "format": "date"
+            "format": "date-time",
+            "description": "when this employment was created"
           },
           "updated_at": {
             "type": "string",
-            "format": "date"
+            "format": "date-time",
+            "description": "when this employment was last updated"
           }
         },
         "required": [
@@ -174,6 +652,335 @@
           "user",
           "created_at",
           "updated_at"
+        ]
+      },
+      "ActivityProject": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "the id of the project"
+          },
+          "name": {
+            "type": "string",
+            "description": "the name of the project",
+            "example": "Website Relaunch"
+          },
+          "billable": {
+            "type": "boolean",
+            "description": "whether the project is billable or not"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "billable"
+        ]
+      },
+      "ActivityTask": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "the id of the task"
+          },
+          "name": {
+            "type": "string",
+            "description": "the name of the task",
+            "example": "Concept"
+          },
+          "billable": {
+            "type": "boolean",
+            "description": "whether the task is billable or not"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "billable"
+        ]
+      },
+      "ActivityCustomer": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "the id of the customer"
+          },
+          "name": {
+            "type": "string",
+            "description": "the name of the customer",
+            "example": "Example Inc."
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ]
+      },
+      "ActivityUser": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "the id of the user"
+          },
+          "firstname": {
+            "type": "string",
+            "description": "the first name of the user",
+            "example": "Jane"
+          },
+          "lastname": {
+            "type": "string",
+            "description": "the last name of the user",
+            "example": "Doe"
+          }
+        },
+        "required": [
+          "id",
+          "firstname",
+          "lastname"
+        ]
+      },
+      "Activity": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "the id of the activity"
+          },
+          "date": {
+            "type": "string",
+            "format": "date",
+            "description": "the date when the activity was logged"
+          },
+          "hours": {
+            "type": "number",
+            "format": "float",
+            "description": "how many hours were logged",
+            "example": 1.25
+          },
+          "description": {
+            "type": "string",
+            "description": "the description of the activity",
+            "nullable": true,
+            "example": "Analysis context and dependencies"
+          },
+          "billed": {
+            "type": "boolean",
+            "description": "whether this activity has been billed"
+          },
+          "billable": {
+            "type": "boolean",
+            "description": "whether this activity can been billed"
+          },
+          "tag": {
+            "type": "string",
+            "description": "a tag for the activity"
+          },
+          "remote_service": {
+            "type": "string",
+            "enum": [
+              "trello",
+              "jira",
+              "asana",
+              "basecamp",
+              "wunderlist",
+              "basecamp2",
+              "basecamp3",
+              "toggl",
+              "mite",
+              "github",
+              "youtrack"
+            ],
+            "description": "the name of the remote service this activity connects to",
+            "nullable": true
+          },
+          "remote_id": {
+            "type": "string",
+            "description": "the id of the corresponding record on the remote service",
+            "nullable": true,
+            "example": "9qzOS8AA"
+          },
+          "remote_url": {
+            "type": "string",
+            "description": "a url pointing to the record on the remote service",
+            "nullable": true,
+            "example": "https://trello.com/c/9qzOS8AA/123-analyse"
+          },
+          "project": {
+            "$ref": "#/components/schemas/ActivityProject"
+          },
+          "task": {
+            "$ref": "#/components/schemas/ActivityTask"
+          },
+          "user": {
+            "$ref": "#/components/schemas/ActivityUser"
+          },
+          "hourly_rate": {
+            "type": "number",
+            "format": "float",
+            "description": "the hourly rate for this activity",
+            "example": 150
+          },
+          "timer_started_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "a timestamp for when the timer was started (if it's running)",
+            "nullable": true
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "when this activity was created"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "when this activity was last updated"
+          }
+        },
+        "required": [
+          "id",
+          "date",
+          "hours",
+          "tag",
+          "project",
+          "task",
+          "user",
+          "created_at",
+          "updated_at"
+        ]
+      },
+      "WriteActivity": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date",
+            "description": "the date when the activity is logged"
+          },
+          "task_id": {
+            "type": "integer",
+            "description": "the id of the task this activity should be logged on"
+          },
+          "project_id": {
+            "type": "integer",
+            "description": "the id of the project this activity should be logged on"
+          },
+          "description": {
+            "type": "string",
+            "description": "the description of the activity",
+            "nullable": true,
+            "example": "Analysis context and dependencies"
+          },
+          "tag": {
+            "type": "string",
+            "description": "a tag for the activity",
+            "example": "RMT-123"
+          },
+          "seconds": {
+            "type": "integer",
+            "description": "💡 to avoid rounding issues, instead of hours you can also pass seconds",
+            "example": 3600
+          },
+          "hours": {
+            "type": "number",
+            "format": "float",
+            "description": "how many hours are logged 💡 passing 0 will start a timer if date is today",
+            "example": 1.25
+          },
+          "billable": {
+            "type": "boolean",
+            "description": "whether this activity can been billed (default: `true` or dependent on project configuration)"
+          },
+          "remote_service": {
+            "type": "string",
+            "enum": [
+              "trello",
+              "jira",
+              "asana",
+              "basecamp",
+              "wunderlist",
+              "basecamp2",
+              "basecamp3",
+              "toggl",
+              "mite",
+              "github",
+              "youtrack"
+            ],
+            "description": "the name of the remote service this activity connects to"
+          },
+          "remote_url": {
+            "type": "string",
+            "description": "a url pointing to the record on the remote service",
+            "nullable": true,
+            "example": "https://trello.com/c/9qzOS8AA/123-analyse"
+          },
+          "remote_id": {
+            "type": "string",
+            "description": "the id of the corresponding record on the remote service",
+            "nullable": true,
+            "example": "9qzOS8AA"
+          }
+        }
+      },
+      "CreateActivity": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date",
+            "description": "the date when the activity is logged"
+          },
+          "task_id": {
+            "type": "integer",
+            "description": "the id of the task this activity should be logged on"
+          },
+          "project_id": {
+            "type": "integer",
+            "description": "the id of the project this activity should be logged on"
+          }
+        },
+        "required": [
+          "date",
+          "task_id",
+          "project_id"
+        ]
+      },
+      "DisregardActivities": {
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "string",
+            "description": "the reason why the activities were disregarded",
+            "example": "Courtesy service as agreed"
+          },
+          "activity_ids": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "description": "the ids of the activities that should be disregarded",
+            "example": [
+              123,
+              234,
+              345
+            ]
+          },
+          "company_id": {
+            "type": "integer",
+            "description": "customer ID these activities belong to"
+          },
+          "project_id": {
+            "type": "integer",
+            "description": "project ID these activities belong to"
+          }
+        },
+        "required": [
+          "reason",
+          "activity_ids",
+          "company_id"
         ]
       }
     },

@@ -16,6 +16,8 @@ jobs:
         run: yarn install --frozen-lockfile
       - name: Build
         run: yarn build
+      - name: Copy static files
+        run: cp moco-api-postman.png public/
       - name: Publish Pages
         uses: JamesIves/github-pages-deploy-action@4.1.7
         with:
