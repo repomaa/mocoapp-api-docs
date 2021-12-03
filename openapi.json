@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "MOCO API",
-    "description": "  ## This is the official API documentation for mocoapp.com\n\n  <!-- TOC depthfrom:2 -->\n\n  - [General](#general)\n  - [Entities](#entities)\n  - [Authentication](#authentication)\n  - [Postman example](#postman-example)\n  - [Client Implementations / API Wrappers](#client-implementations--api-wrappers)\n  - [Impersonation](#impersonation)\n  - [Rate Limiting](#rate-limiting)\n  - [Pagination](#pagination)\n  - [Errors and HTTP status codes](#errors-and-http-status-codes)\n  - [Sorting](#sorting)\n  - [Custom Fields](#custom-fields)\n  - [WebHooks](#webhooks)\n    - [Calculating the signature](#calculating-the-signature)\n    - [Notes](#notes)\n\n  <!-- /TOC -->\n\n  <h3 id=\"general\">General</h3>\n\n  - Data to MOCO is sent as JSON (Content-Type: application/json) and also\n    represented as JSON\n  - All requests have to be [authenticated](#authentication) with a user-specific key\n  - Example responses showcase the happy case, i.e. usually the `200 OK` response\n  - Collections are usually [paginated](#pagination)\n  - Zapier triggers are **not** triggered for API requests\n  - Timestamps `created_at` and `updated_at` are sent for all entities in UTC,\n    as ISO8601 format.\n  - For synchronization almost all resources can be filtered by `updated_after`\n    passing a time in UTC, as ISO8601 format.\n  - MOCO does not support any client-libraries at the moment. However, there\n    are currently the following unofficial clients available, which you can use\n    at your risk: [Python Client](https://github.com/sommalia/moco-wrapper)\n\n  <h3 id=\"entities\">Entities</h3>\n\n  All the entities exposed via the API can be found in their respective sections.\n\n  - Account / Fixed Costs\n  - Account / Hourly Rates\n  - Account / Internal Hourly Rates\n  - [Activities](#operations-tag-Activities)\n  - Comments\n  - Companies\n  - Contacts\n  - Deal Categories\n  - Deals / Leads\n  - Invoice Payments\n  - Invoice Reminders\n  - Invoices\n  - Offers\n  - Planning Entry (New Planning)\n  - Project Contracts\n  - Project Expenses\n  - Project Payment Schedules\n  - Project Recurring Expenses\n  - Project Tasks\n  - Projects\n  - Purchase Categories\n  - Purchase Drafts\n  - Purchases\n  - Schedules (Absences)\n  - Tags / Labels\n  - Units / Teams\n  - [User Employments](#operations-tag-User_Employments)\n  - User Holidays\n  - User Presences\n  - Users\n  - WebHooks\n  - Reports\n\n  <h3 id=\"authentication\">Authentication</h3>\n\n  You need an API key for authentication. Each user can find their\n  user-specific key on mocoapp.com on their profile in the \"Integrations\" tab.\n  This key is provided as an Authorization header.\n\n  ```bash\n  curl -X GET \\\n    'https://{domain}.mocoapp.com/api/v1/projects' \\\n    -H 'Authorization: Bearer token=YOUR_API_KEY'\n  ```\n\n  See [the Session endpoints](#operations-tag-Session) for details.\n\n  <h3 id=\"postman-example\">Postman example</h3>\n\n  There are a few tools to try out the MOCO API. All the examples in this documentation use `curl` to demonstrate the API endpoint.\n  A popular graphical UI for REST is [Postman](https://www.postman.com/). Here's an example request for the projects list including the authentication:\n\n  ![Postman example request](./moco-api-postman.png \"Postman example request\")\n\n  <h3 id=\"client-implementations--api-wrappers\">Client Implementations / API Wrappers</h3>\n\n  Here's a list of API client implementations, not maintained by us. Feel free to open up a PR to point to your implementation so others can re-use it.\n\n  | Language | Repository                                                        |\n  | -------- | :---------------------------------------------------------------: |\n  | Python   | [sommalia/moco-wrapper](https://github.com/sommalia/moco-wrapper) |\n\n  <h3 id=\"impersonation\">Impersonation</h3>\n\n  By default all requests are scoped to the authenticated user. Some resources cannot be written in behalf of other users like `Activities` and `User Presences`. This reflects the behaviour in the UI. But you can login as another user provided that the authenticated user has permission to _Staff_. To achieve the same behaviour in the API, one can set the following x-header:\n\n  `X-IMPERSONATE-USER-ID=123` (user id to act in behalf of)\n\n  <h3 id=\"rate-limiting\">Rate Limiting</h3>\n\n  You can expect to be able to fire 15 requests within a time frame of 15 seconds. If you exceed this limit, the server responds with `429 Too Many Requests`.\n\n  <h3 id=\"pagination\">Pagination</h3>\n\n  Responses are paginated with a common default of 100 entries per page. In the HTTP response header, the current page, the entries per page and the number of total entries is reported. There is also a link header to links to the consecutive page.\n\n  - **X-Page** – 3\n  - **X-Per-Page** – 100\n  - **X-Total** – 415\n  - **Link** – `<https://{domain}.mocoapp.com/api/v1/projects.json?page=4>; rel=\"next\"`\n\n  If there is not Link header with `rel=\"next\"`, the current page is the last page.\n\n  <h3 id=\"errors-and-http-status-codes\">Errors and HTTP status codes</h3>\n\n  The MOCO-API is mostly conformant with the [general HTTP status codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes).\n\n  Here are the most comment errors you will see:\n\n  - **401 Unauthorized** - Check the error message in the response body\n  - **403 Forbidden** - Check your [Authentication](#authentication) or your MOCO user permission\n  - **404 Not Found** - Check that resource exists (maybe it was deleted in the meantime)\n  - **422 Unprocessable Entity** - Check the provided error message in the response body\n  - **429 Too Many Requests** - Check [Rate Limiting](#rate-limiting)\n\n  <h3 id=\"sorting\">Sorting</h3>\n\n  Sorting is controlled by the `sort_by` query parameter. Its value is the field name that should be sorted, followed by an optional sorting order (`asc` or `desc`, default is `asc`).\n\n  Example:\n\n  - `https://{domain}.mocoapp.com/api/v1/offers?sort_by=title desc`\n\n  <h3 id=\"custom-fields\">Custom Fields</h3>\n\n  MOCO supports adding custom fields to many of its resources. These custom fields are readable and writable via the `custom_properties` field.\n\n  ```json\n  \"custom_properties\": {\n      \"UID\": \"123-UID-456\",\n      \"Line of business\": \"Automotive\"\n  },\n  ```\n\n  Parameters are sent with their name as key:\n\n  ```bash\n  curl -X POST \\\n    https://{domain}.mocoapp.com/api/v1/customers \\\n    -H 'Authorization: Token token=YOUR_API_KEY' \\\n    -H 'Content-Type: application/json' \\\n    -d '{\n      \"name\": \"Beispiel AG\",\n      \"currency\": \"CHF\",\n      \"custom_properties\": {\n        \"Line of business\": \"Automotive\"\n      }\n    }'\n  ```\n\n  All values are encoded as strings, expect for Multiple Choice, which is encoded as an array.\n\n  ```bash\n  curl -X POST \\\n    https://{domain}.mocoapp.com/api/v1/customers \\\n    -H 'Authorization: Token token=YOUR_API_KEY' \\\n    -H 'Content-Type: application/json' \\\n    -d '{\n          \"custom_properties\": {\n            \"Line of business\": [\"Automotive\", \"Banking\"]\n          }\n        }'\n  ```\n\n  - Single-line input – \"Automotive\"\n  - Mehrzeilige Eingabe – \"A multiline input...\"\n  - Link – \"https://www...\"\n  - Date – \"2021-12-31\"\n  - Yes/No – \"0\", \"1\" (0 = No, 1 = Yes)\n  - Single choice – \"Value\"\n  - Multiple choice – [\"Value 1\", \"Value 2\"]\n\n  ⚡ **WARNING** ⚡: If you use custom fields, all of them have to be provided. If not, any that are not transmitted will be removed.\n\n  <h3 id=\"webhooks\">WebHooks</h3>\n\n  Using WebHooks, integrating any system in real time becomes possible. Events in MOCO can be assigned subscriptions.\n  Whenever an event triggers, MOCO sends an HTTPS `POST` payload to the WebHook's configured URL with an HMAC SHA265 signature.\n  This way, MOCOs integrity as a legitimate sender of this information can be verified. Additional headers provide context\n  for the sent payload.\n\n  - **X-Moco-Target** – Activity, Customer, Project, ...\n  - **X-Moco-Event** – create, update, delete, archive, ...\n  - **X-Moco-Timestamp** – Timestamp for this event\n  - **X-Moco-Signature** – The signature fo this request, see comment below for details\n  - **X-Moco-User-Id** – The user ID that triggered this hook\n  - The receiver has to process the request within 10 seconds\n\n  The following example shows a WebHook triggered by an activity creation.\n\n  ```\n  X-Moco-Target: Activity\n  X-Moco-Event: create\n  X-Moco-Timestamp: 1527170410463\n  X-Moco-Signature: f457bffc50e9b63f455ab107c55f2f61956550aa5525c2cfe07f574014bd8a9e\n  X-Moco-User-Id: 933613686\n  ```\n\n  - To debug and try out web hooks, we recommend https://webhook.site or https://requestbin.com/ – this services provides you with temporary\n    HTTPS URLs that let you inspect any incoming WebHook data.\n  - WebHooks are only provided to customers after they subscribe to MOCO.\n  - WebHooks are not guaranteed to be delivered in order. Pay attention to the provided time stamp if this is important\n    for your use case.\n  - The signature uses HMAC with SHA256 to sign the whole payload. The key for the signature is the 32 characters\n    hexadecimal string displayed in the web hook overview.\n\n  <h4 id=\"calculating-the-signature\">Calculating the signature</h4>\n\n  OpenSSL CLI:\n\n  ```bash\n  $ echo -n '{id: 111, description: \"a description\"}' | openssl sha256 -hmac \"1d608b9d72219b90ff2393a1d3ee0ac0\"\n  (stdin)= 09f9ebc0adeb597cb7cb37fd72b20be0caeca6bd9fb67416b663606bd7f89183\n  ```\n\n  Ruby:\n\n  ```ruby\n  payload = '{id: 111, description: \"a description\"}'\n  signature_key = \"1d608b9d72219b90ff2393a1d3ee0ac0\"\n  payload_signature = OpenSSL::HMAC.hexdigest(\"SHA256\", signature_key, payload)\n  # => \"09f9ebc0adeb597cb7cb37fd72b20be0caeca6bd9fb67416b663606bd7f89183\"\n  ```\n\n  NodeJS:\n\n  ```javascript\n  const crypto = require(\"crypto\");\n  const hmac = crypto.createHmac(\"sha256\", \"1d608b9d72219b90ff2393a1d3ee0ac0\");\n  const data = hmac.update('{id: 111, description: \"a description\"}');\n  const digest = data.digest(\"hex\");\n  console.log(\"digest = \" + digest);\n  ```\n\n  <h4 id=\"notes\">Notes</h4>\n\n  - We expect a successful response code for the Webhook request (i.e. any 2XX code), otherwise it's considered a failure\n    and it's retried.\n  - After 500 consecutive failures a Webhook is automatically disabled.\n",
+    "description": "  ## This is the official API documentation for mocoapp.com\n\n  <!-- TOC depthfrom:2 -->\n\n  - [General](#general)\n  - [Entities](#entities)\n  - [Authentication](#authentication)\n  - [Postman example](#postman-example)\n  - [Client Implementations / API Wrappers](#client-implementations--api-wrappers)\n  - [Impersonation](#impersonation)\n  - [Rate Limiting](#rate-limiting)\n  - [Pagination](#pagination)\n  - [Errors and HTTP status codes](#errors-and-http-status-codes)\n  - [Sorting](#sorting)\n  - [Custom Fields](#custom-fields)\n  - [WebHooks](#webhooks)\n    - [Calculating the signature](#calculating-the-signature)\n    - [Notes](#notes)\n\n  <!-- /TOC -->\n\n  <h3 id=\"general\">General</h3>\n\n  - Data to MOCO is sent as JSON (Content-Type: application/json) and also\n    represented as JSON\n  - All requests have to be [authenticated](#authentication) with a user-specific key\n  - Example responses showcase the happy case, i.e. usually the `200 OK` response\n  - Collections are usually [paginated](#pagination)\n  - Zapier triggers are **not** triggered for API requests\n  - Timestamps `created_at` and `updated_at` are sent for all entities in UTC,\n    as ISO8601 format.\n  - For synchronization almost all resources can be filtered by `updated_after`\n    passing a time in UTC, as ISO8601 format.\n  - MOCO does not support any client-libraries at the moment. However, there\n    are currently the following unofficial clients available, which you can use\n    at your risk: [Python Client](https://github.com/sommalia/moco-wrapper)\n\n  <h3 id=\"entities\">Entities</h3>\n\n  All the entities exposed via the API can be found in their respective sections.\n\n  - [Account / Fixed Costs](#operations-tag-Fixed_costs_\\\\(Account\\\\))\n  - [Account / Hourly Rates](#operations-tag-Hourly_rates_\\\\(Account\\\\))\n  - [Account / Internal Hourly Rates](#operations-tag-Internal_hourly_rates_\\\\(Account\\\\))\n  - [Activities](#operations-tag-Activities)\n  - Comments\n  - Companies\n  - Contacts\n  - Deal Categories\n  - Deals / Leads\n  - Invoice Payments\n  - Invoice Reminders\n  - Invoices\n  - Offers\n  - Planning Entry (New Planning)\n  - Project Contracts\n  - Project Expenses\n  - Project Payment Schedules\n  - Project Recurring Expenses\n  - Project Tasks\n  - Projects\n  - Purchase Categories\n  - Purchase Drafts\n  - Purchases\n  - Schedules (Absences)\n  - Tags / Labels\n  - Units / Teams\n  - [User Employments](#operations-tag-User_Employments)\n  - User Holidays\n  - User Presences\n  - Users\n  - WebHooks\n  - Reports\n\n  <h3 id=\"authentication\">Authentication</h3>\n\n  You need an API key for authentication. Each user can find their\n  user-specific key on mocoapp.com on their profile in the \"Integrations\" tab.\n  This key is provided as an Authorization header.\n\n  ```bash\n  curl -X GET \\\n    'https://{domain}.mocoapp.com/api/v1/projects' \\\n    -H 'Authorization: Bearer token=YOUR_API_KEY'\n  ```\n\n  See [the Session endpoints](#operations-tag-Session) for details.\n\n  <h3 id=\"postman-example\">Postman example</h3>\n\n  There are a few tools to try out the MOCO API. All the examples in this documentation use `curl` to demonstrate the API endpoint.\n  A popular graphical UI for REST is [Postman](https://www.postman.com/). Here's an example request for the projects list including the authentication:\n\n  ![Postman example request](./moco-api-postman.png \"Postman example request\")\n\n  <h3 id=\"client-implementations--api-wrappers\">Client Implementations / API Wrappers</h3>\n\n  Here's a list of API client implementations, not maintained by us. Feel free to open up a PR to point to your implementation so others can re-use it.\n\n  | Language | Repository                                                        |\n  | -------- | :---------------------------------------------------------------: |\n  | Python   | [sommalia/moco-wrapper](https://github.com/sommalia/moco-wrapper) |\n\n  <h3 id=\"impersonation\">Impersonation</h3>\n\n  By default all requests are scoped to the authenticated user. Some resources cannot be written in behalf of other users like `Activities` and `User Presences`. This reflects the behaviour in the UI. But you can login as another user provided that the authenticated user has permission to _Staff_. To achieve the same behaviour in the API, one can set the following x-header:\n\n  `X-IMPERSONATE-USER-ID=123` (user id to act in behalf of)\n\n  <h3 id=\"rate-limiting\">Rate Limiting</h3>\n\n  You can expect to be able to fire 15 requests within a time frame of 15 seconds. If you exceed this limit, the server responds with `429 Too Many Requests`.\n\n  <h3 id=\"pagination\">Pagination</h3>\n\n  Responses are paginated with a common default of 100 entries per page. In the HTTP response header, the current page, the entries per page and the number of total entries is reported. There is also a link header to links to the consecutive page.\n\n  - **X-Page** – 3\n  - **X-Per-Page** – 100\n  - **X-Total** – 415\n  - **Link** – `<https://{domain}.mocoapp.com/api/v1/projects.json?page=4>; rel=\"next\"`\n\n  If there is not Link header with `rel=\"next\"`, the current page is the last page.\n\n  <h3 id=\"errors-and-http-status-codes\">Errors and HTTP status codes</h3>\n\n  The MOCO-API is mostly conformant with the [general HTTP status codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes).\n\n  Here are the most comment errors you will see:\n\n  - **401 Unauthorized** - Check the error message in the response body\n  - **403 Forbidden** - Check your [Authentication](#authentication) or your MOCO user permission\n  - **404 Not Found** - Check that resource exists (maybe it was deleted in the meantime)\n  - **422 Unprocessable Entity** - Check the provided error message in the response body\n  - **429 Too Many Requests** - Check [Rate Limiting](#rate-limiting)\n\n  <h3 id=\"sorting\">Sorting</h3>\n\n  Sorting is controlled by the `sort_by` query parameter. Its value is the field name that should be sorted, followed by an optional sorting order (`asc` or `desc`, default is `asc`).\n\n  Example:\n\n  - `https://{domain}.mocoapp.com/api/v1/offers?sort_by=title desc`\n\n  <h3 id=\"custom-fields\">Custom Fields</h3>\n\n  MOCO supports adding custom fields to many of its resources. These custom fields are readable and writable via the `custom_properties` field.\n\n  ```json\n  \"custom_properties\": {\n      \"UID\": \"123-UID-456\",\n      \"Line of business\": \"Automotive\"\n  },\n  ```\n\n  Parameters are sent with their name as key:\n\n  ```bash\n  curl -X POST \\\n    https://{domain}.mocoapp.com/api/v1/customers \\\n    -H 'Authorization: Token token=YOUR_API_KEY' \\\n    -H 'Content-Type: application/json' \\\n    -d '{\n      \"name\": \"Beispiel AG\",\n      \"currency\": \"CHF\",\n      \"custom_properties\": {\n        \"Line of business\": \"Automotive\"\n      }\n    }'\n  ```\n\n  All values are encoded as strings, expect for Multiple Choice, which is encoded as an array.\n\n  ```bash\n  curl -X POST \\\n    https://{domain}.mocoapp.com/api/v1/customers \\\n    -H 'Authorization: Token token=YOUR_API_KEY' \\\n    -H 'Content-Type: application/json' \\\n    -d '{\n          \"custom_properties\": {\n            \"Line of business\": [\"Automotive\", \"Banking\"]\n          }\n        }'\n  ```\n\n  - Single-line input – \"Automotive\"\n  - Mehrzeilige Eingabe – \"A multiline input...\"\n  - Link – \"https://www...\"\n  - Date – \"2021-12-31\"\n  - Yes/No – \"0\", \"1\" (0 = No, 1 = Yes)\n  - Single choice – \"Value\"\n  - Multiple choice – [\"Value 1\", \"Value 2\"]\n\n  ⚡ **WARNING** ⚡: If you use custom fields, all of them have to be provided. If not, any that are not transmitted will be removed.\n\n  <h3 id=\"webhooks\">WebHooks</h3>\n\n  Using WebHooks, integrating any system in real time becomes possible. Events in MOCO can be assigned subscriptions.\n  Whenever an event triggers, MOCO sends an HTTPS `POST` payload to the WebHook's configured URL with an HMAC SHA265 signature.\n  This way, MOCOs integrity as a legitimate sender of this information can be verified. Additional headers provide context\n  for the sent payload.\n\n  - **X-Moco-Target** – Activity, Customer, Project, ...\n  - **X-Moco-Event** – create, update, delete, archive, ...\n  - **X-Moco-Timestamp** – Timestamp for this event\n  - **X-Moco-Signature** – The signature fo this request, see comment below for details\n  - **X-Moco-User-Id** – The user ID that triggered this hook\n  - The receiver has to process the request within 10 seconds\n\n  The following example shows a WebHook triggered by an activity creation.\n\n  ```\n  X-Moco-Target: Activity\n  X-Moco-Event: create\n  X-Moco-Timestamp: 1527170410463\n  X-Moco-Signature: f457bffc50e9b63f455ab107c55f2f61956550aa5525c2cfe07f574014bd8a9e\n  X-Moco-User-Id: 933613686\n  ```\n\n  - To debug and try out web hooks, we recommend https://webhook.site or https://requestbin.com/ – this services provides you with temporary\n    HTTPS URLs that let you inspect any incoming WebHook data.\n  - WebHooks are only provided to customers after they subscribe to MOCO.\n  - WebHooks are not guaranteed to be delivered in order. Pay attention to the provided time stamp if this is important\n    for your use case.\n  - The signature uses HMAC with SHA256 to sign the whole payload. The key for the signature is the 32 characters\n    hexadecimal string displayed in the web hook overview.\n\n  <h4 id=\"calculating-the-signature\">Calculating the signature</h4>\n\n  OpenSSL CLI:\n\n  ```bash\n  $ echo -n '{id: 111, description: \"a description\"}' | openssl sha256 -hmac \"1d608b9d72219b90ff2393a1d3ee0ac0\"\n  (stdin)= 09f9ebc0adeb597cb7cb37fd72b20be0caeca6bd9fb67416b663606bd7f89183\n  ```\n\n  Ruby:\n\n  ```ruby\n  payload = '{id: 111, description: \"a description\"}'\n  signature_key = \"1d608b9d72219b90ff2393a1d3ee0ac0\"\n  payload_signature = OpenSSL::HMAC.hexdigest(\"SHA256\", signature_key, payload)\n  # => \"09f9ebc0adeb597cb7cb37fd72b20be0caeca6bd9fb67416b663606bd7f89183\"\n  ```\n\n  NodeJS:\n\n  ```javascript\n  const crypto = require(\"crypto\");\n  const hmac = crypto.createHmac(\"sha256\", \"1d608b9d72219b90ff2393a1d3ee0ac0\");\n  const data = hmac.update('{id: 111, description: \"a description\"}');\n  const digest = data.digest(\"hex\");\n  console.log(\"digest = \" + digest);\n  ```\n\n  <h4 id=\"notes\">Notes</h4>\n\n  - We expect a successful response code for the Webhook request (i.e. any 2XX code), otherwise it's considered a failure\n    and it's retried.\n  - After 500 consecutive failures a Webhook is automatically disabled.\n",
     "version": "1.0.0"
   },
   "servers": [
@@ -17,6 +17,207 @@
     }
   ],
   "paths": {
+    "/account/fixed_costs": {
+      "get": {
+        "tags": [
+          "Fixed costs (Account)"
+        ],
+        "operationId": "Fixed costs (Account)-index",
+        "parameters": [
+          {
+            "name": "year",
+            "description": "limit costs to a specific year",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "fixed costs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FixedCost"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Retrieve all fixed costs",
+        "summary": "Retrieve all fixed costs",
+        "security": [
+          {
+            "api_key": [
+
+            ]
+          }
+        ],
+        "x-controller": "api/v1/account/fixed_costs",
+        "x-action": "index"
+      }
+    },
+    "/account/hourly_rates": {
+      "get": {
+        "tags": [
+          "Hourly rates (Account)"
+        ],
+        "operationId": "Hourly rates (Account)-index",
+        "parameters": [
+          {
+            "name": "company_id",
+            "description": "only return hourly rates for a company with this id",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "hourly rates",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HourlyRates"
+                }
+              }
+            }
+          }
+        },
+        "description": "Retrieve hourly rates",
+        "summary": "Retrieve hourly rates",
+        "security": [
+          {
+            "api_key": [
+
+            ]
+          }
+        ],
+        "x-controller": "api/v1/account/hourly_rates",
+        "x-action": "index"
+      }
+    },
+    "/account/intenal_hourly_rates": {
+      "get": {
+        "tags": [
+          "Internal hourly rates (Account)"
+        ],
+        "operationId": "Internal hourly rates (Account)-show",
+        "parameters": [
+          {
+            "name": "unit_id",
+            "description": "only return internal hourly rates for a unit with this id",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "years",
+            "description": "only return internal hourly rates for the given (comma separated) year(s)",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "oneOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "internal hourly rates",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserHourlyRates"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Retrieve internal hourly rates",
+        "summary": "Retrieve internal hourly rates",
+        "security": [
+          {
+            "api_key": [
+
+            ]
+          }
+        ],
+        "x-controller": "api/v1/account/internal_hourly_rates",
+        "x-action": "show"
+      },
+      "patch": {
+        "tags": [
+          "Internal hourly rates (Account)"
+        ],
+        "operationId": "Internal hourly rates (Account)-update",
+        "parameters": [
+
+        ],
+        "responses": {
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "ok"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Update internal hourly rates",
+        "summary": "Update internal hourly rates",
+        "security": [
+          {
+            "api_key": [
+
+            ]
+          }
+        ],
+        "x-controller": "api/v1/account/internal_hourly_rates",
+        "x-action": "update",
+        "requestBody": {
+          "description": "the rates that should be updated",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateInternalHourlyRates"
+              }
+            }
+          }
+        }
+      }
+    },
     "/users/employments": {
       "get": {
         "tags": [
@@ -534,12 +735,244 @@
       "description": "German: \"Zeiteinträge\""
     },
     {
+      "name": "Fixed costs (Account)",
+      "description": "German: \"Fixkosten\""
+    },
+    {
+      "name": "Hourly rates (Account)",
+      "description": "German: \"Stundensätze\""
+    },
+    {
+      "name": "Internal hourly rates (Account)",
+      "description": "German: \"Interne Stundensätze\""
+    },
+    {
       "name": "User Employments",
       "description": "German: \"Wochenmodell\""
     }
   ],
   "components": {
     "schemas": {
+      "FixedCostEntry": {
+        "type": "object",
+        "properties": {
+          "year": {
+            "type": "integer",
+            "description": "the year of this cost entry",
+            "example": 2021
+          },
+          "month": {
+            "type": "integer",
+            "description": "the month of this cost entry",
+            "example": 1
+          },
+          "amount": {
+            "type": "number",
+            "format": "float",
+            "description": "the amount of this cost entry",
+            "example": 100000.0
+          }
+        },
+        "required": [
+          "year",
+          "month",
+          "amount"
+        ]
+      },
+      "FixedCost": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "the id of the fixed cost"
+          },
+          "title": {
+            "type": "string",
+            "description": "the title of the fixed cost",
+            "example": "Salaries"
+          },
+          "description": {
+            "type": "string",
+            "description": "the description of the fixed cost",
+            "example": "Monthly total salaries for the company"
+          },
+          "costs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FixedCostEntry"
+            },
+            "description": "the costs that have been associated with this fixed cost",
+            "example": [
+              {
+                "year": 2021,
+                "month": 1,
+                "amount": 100000.0
+              },
+              {
+                "year": 2021,
+                "month": 2,
+                "amount": 100000.0
+              },
+              {
+                "year": 2021,
+                "month": 3,
+                "amount": 100000.0
+              }
+            ]
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "when this fixed cost was created"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "when this fixed cost was last updated"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "description",
+          "costs",
+          "created_at",
+          "updated_at"
+        ]
+      },
+      "HourlyRate": {
+        "type": "object",
+        "properties": {
+          "currency": {
+            "type": "string",
+            "description": "the currency for this rate",
+            "example": "CHF"
+          },
+          "hourly_rate": {
+            "type": "number",
+            "format": "float",
+            "description": "the amount in the given currency",
+            "example": 150.0
+          }
+        }
+      },
+      "HourlyRatesForTask": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "the id of the task"
+          },
+          "name": {
+            "type": "string",
+            "description": "the name of the task",
+            "example": "Grafik"
+          },
+          "rates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HourlyRate"
+            },
+            "description": "the rates for this task"
+          }
+        }
+      },
+      "HourlyRatesForUser": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "the id of the user"
+          },
+          "full_name": {
+            "type": "string",
+            "description": "the full name of the user",
+            "example": "Max Muster"
+          },
+          "rates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HourlyRate"
+            },
+            "description": "the rates for this task"
+          }
+        }
+      },
+      "HourlyRates": {
+        "type": "object",
+        "properties": {
+          "defaults_rates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HourlyRate"
+            },
+            "description": "the default rates"
+          },
+          "tasks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HourlyRatesForTask"
+            },
+            "description": "the tasks with their rates"
+          },
+          "users": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HourlyRatesForUser"
+            },
+            "description": "the users with their rates"
+          }
+        },
+        "required": [
+          "defaults_rates",
+          "tasks",
+          "users"
+        ]
+      },
+      "UserHourlyRate": {
+        "type": "object",
+        "properties": {
+          "year": {
+            "type": "integer",
+            "description": "the year this hourly rate was/is active",
+            "example": 2021
+          },
+          "rate": {
+            "type": "number",
+            "format": "float",
+            "description": "the rate in account currency"
+          }
+        },
+        "required": [
+          "year",
+          "rate"
+        ]
+      },
+      "UserHourlyRates": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "the id of the user"
+          },
+          "full_name": {
+            "type": "string",
+            "description": "the full name of the user",
+            "example": "Max Muster"
+          },
+          "rates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserHourlyRate"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "full_name",
+          "rates"
+        ]
+      },
       "EmploymentPattern": {
         "type": "object",
         "properties": {
@@ -981,6 +1414,46 @@
           "reason",
           "activity_ids",
           "company_id"
+        ]
+      },
+      "UpdateUserHourlyRate": {
+        "type": "object",
+        "properties": {
+          "user_id": {
+            "type": "integer",
+            "description": "the id of the user this rate applies to"
+          },
+          "rate": {
+            "type": "number",
+            "format": "float",
+            "description": "the id of the user this rate applies to",
+            "example": 140.0
+          }
+        },
+        "required": [
+          "user_id",
+          "rate"
+        ]
+      },
+      "UpdateInternalHourlyRates": {
+        "type": "object",
+        "properties": {
+          "year": {
+            "type": "integer",
+            "description": "the year the rates should be updated for",
+            "example": 2021
+          },
+          "rates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UpdateUserHourlyRate"
+            },
+            "description": "the rates that should be updated"
+          }
+        },
+        "required": [
+          "year",
+          "rates"
         ]
       }
     },
