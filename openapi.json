@@ -1,0 +1,187 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "MOCO API",
+    "description": "Public REST API for MOCO",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://{domain}/api/v1",
+      "variables": {
+        "domain": {
+          "description": "Your personal MOCO domain",
+          "default": "demo.mocoapp.com"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/users/employments": {
+      "get": {
+        "tags": [
+          "User Employments"
+        ],
+        "operationId": "User Employments-index",
+        "parameters": [
+          {
+            "name": "from",
+            "description": "from",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "to",
+            "description": "to",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "user_id",
+            "description": "user_id",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Employment"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Retrieve all employments",
+        "summary": "Retrieve all employments",
+        "security": [
+          {
+            "api_key": [
+
+            ]
+          }
+        ],
+        "x-controller": "api/v1/users/employments",
+        "x-action": "index"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "User Employments",
+      "description": ""
+    }
+  ],
+  "components": {
+    "schemas": {
+      "EmploymentPattern": {
+        "type": "object",
+        "properties": {
+          "am": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "float"
+            }
+          },
+          "pm": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "float"
+            }
+          }
+        },
+        "required": [
+          "am",
+          "pm"
+        ]
+      },
+      "EmploymentUser": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "firstname": {
+            "type": "string"
+          },
+          "lastname": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "firstname",
+          "lastname"
+        ]
+      },
+      "Employment": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "weekly_target_hours": {
+            "type": "number",
+            "format": "float"
+          },
+          "pattern": {
+            "$ref": "#/components/schemas/EmploymentPattern"
+          },
+          "from": {
+            "type": "string",
+            "format": "date"
+          },
+          "to": {
+            "type": "string",
+            "format": "date"
+          },
+          "user": {
+            "$ref": "#/components/schemas/EmploymentUser"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date"
+          }
+        },
+        "required": [
+          "id",
+          "weekly_target_hours",
+          "pattern",
+          "from",
+          "user",
+          "created_at",
+          "updated_at"
+        ]
+      }
+    },
+    "securitySchemes": {
+      "api_key": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}

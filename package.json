@@ -1,0 +1,30 @@
+{
+  "name": "mocoapp-api-docs",
+  "version": "1.0.0",
+  "description": "This is the official API documentation for mocoapp.com.",
+  "scripts": {
+    "dev": "parcel serve src/index.html",
+    "build": "parcel build --dist-dir public src/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hundertzehn/mocoapp-api-docs.git"
+  },
+  "keywords": [
+    "api",
+    "docs"
+  ],
+  "author": "hundertzehn GmbH",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/hundertzehn/mocoapp-api-docs/issues"
+  },
+  "homepage": "https://github.com/hundertzehn/mocoapp-api-docs#readme",
+  "devDependencies": {
+    "parcel": "^2.0.1"
+  },
+  "dependencies": {
+    "swagger-ui": "^4.1.2"
+  },
+  "browserlist": "> 0.5%, last 2 major versions, not dead"
+}
