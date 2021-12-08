@@ -21,8 +21,7 @@ The invoice reminder representation contains among standard fields also shortene
 {
   "id": 1,
   "title": "Zahlungserinnerung",
-  "salutation": "Bei der Bearbeitung unserer Buchhaltung ist uns aufgefallen, dass wir für folgende Rechnung noch keinen Zahlungseingang verbuchen konnten.",
-  "footer": "Sicherlich handelt es sich hierbei um ein Versehen. Wir bitten Sie höflich, uns den Betrag in den nächsten Tagen zu überweisen. Sollte sich Ihre Zahlung mit diesem Schreiben gekreuzt haben, betrachten Sie diese Erinnerung als gegenstandslos.",
+  "text": "Bei der Bearbeitung unserer Buchhaltung ist uns aufgefallen, dass wir für folgende Rechnung noch keinen Zahlungseingang verbuchen konnten. Sicherlich handelt es sich hierbei um ein Versehen. Wir bitten Sie höflich, uns den Betrag in den nächsten Tagen zu überweisen. Sollte sich Ihre Zahlung mit diesem Schreiben gekreuzt haben, betrachten Sie diese Erinnerung als gegenstandslos.",
   "fee": 0.0,
   "date": "2019-10-16",
   "due_date": "2019-10-30",
@@ -74,7 +73,7 @@ curl -X POST \
   -d '{
         "invoice_id": 546046,
         "title": "Mahnung",
-        "salutation": "Hallo",
+        "text": "Hallo",
         "date": "2020-08-04",
         "due_date": "2020-09-12"
       }'
@@ -83,12 +82,13 @@ curl -X POST \
 Mandatory fields are marked with a star (\*):
 
 - **invoice_id\*** – 546046
-- **title\*** – "Mahnung",
-- **salutation** – "Hallo"
-- **footer** – "Bye"
+- **title** – "Mahnung",
+- **text** – "Sehr geehrte Damen und Herren..."
 - **fee** – 50
 - **date** – "2020-08-04"
 - **due_date** – "2020-09-12"
+
+Fields `title` and `text` are optional. If these fields are obmitted the configured default values are taken.
 
 ## DELETE /invoice_reminders/{id}
 
