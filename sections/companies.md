@@ -22,6 +22,7 @@ The company representation contains among default fields the following features:
 - Custom properties
 - Projects (shortened)
 - User (shortened)
+- billing_vat ("tax", "reverse_charge", "intra_eu" (intra community trade, only applicable for accounts in the EU))
 
 ```json
 {
@@ -47,6 +48,7 @@ The company representation contains among default fields the following features:
   "identifier": "36",
   "intern": false,
   "billing_tax": 0,
+  "billing_vat": { "tax": 0.0, "reverse_charge": true, "intra_eu": true },
   "currency": "CHF",
   "country_code": "CH",
   "vat_identifier": "DE999999999",

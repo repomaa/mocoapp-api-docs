@@ -23,6 +23,7 @@ Includes among the standard fields for purchases also:
 - Payments (list of payments made for the purchase)
 - User
 - Items
+- items.vat ("tax", "reverse_charge", "intra_eu" (intra community trade, only applicable for accounts in the EU))
 
 ```json
 {
@@ -63,6 +64,7 @@ Includes among the standard fields for purchases also:
       "net_total": 44.88,
       "tax_total": 1.12,
       "tax": 2.5,
+      "vat": { "tax": 2.5, "reverse_charge": false, "intra_eu": false },
       "tax_included": true,
       "gross_total": 46.0,
       "category": {
