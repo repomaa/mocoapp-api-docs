@@ -181,6 +181,8 @@ Additionally, these parameters can be supplied:
 - **status** – ("draft", "created", "sent", "partially_paid", "paid", "overdue", "ignored")
 - **date_from** – "2018-01-01"
 - **date_to** – "2018-01-31"
+- **service_period_from** – "2018-01-01"
+- **service_period_to** – "2018-01-31"
 - **tags** "Periodenfremd, Inkasso" (comma separated list)
 - **identifier** "R1903-003"
 - **term** - "term" (wildcard search within title and identifier)
